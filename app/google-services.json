@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "602808929048",
+    "project_id": "tiwari-mart",
+    "storage_bucket": "tiwari-mart.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:602808929048:android:e60157442677ce15f9ec6d",
+        "android_client_info": {
+          "package_name": "com.savage9ishere.tiwarimart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "602808929048-9jtqduvhcsa3o1tm0k4lkv0rae1vofea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0zuIAlDo-WI5R-TJ-xxMMARQWdvjHAiM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "602808929048-9jtqduvhcsa3o1tm0k4lkv0rae1vofea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/second_activity_navigation"
+    app:startDestination="@id/particularCategoryFragment">
+
+    <fragment
+        android:id="@+id/particularCategoryFragment"
+        android:name="com.savage9ishere.tiwarimart.fragment_container.particular_category.ParticularCategoryFragment"
+        android:label="particular_category_fragment"
+        tools:layout="@layout/particular_category_fragment" />
+    <fragment
+        android:id="@+id/particularItemFragment"
+        android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.ParticularItemFragment"
+        android:label="particular_item_fragment"
+        tools:layout="@layout/particular_item_fragment" />
+    <fragment
+        android:id="@+id/checkoutFragment"
+        android:name="com.savage9ishere.tiwarimart.fragment_container.checkout.CheckoutFragment"
+        android:label="checkout_fragment"
+        tools:layout="@layout/checkout_fragment" />
+</navigation>
