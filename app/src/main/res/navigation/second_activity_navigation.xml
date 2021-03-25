@@ -9,7 +9,11 @@
         android:id="@+id/particularCategoryFragment"
         android:name="com.savage9ishere.tiwarimart.fragment_container.particular_category.ParticularCategoryFragment"
         android:label="particular_category_fragment"
-        tools:layout="@layout/particular_category_fragment" />
+        tools:layout="@layout/particular_category_fragment" >
+        <action
+            android:id="@+id/action_particularCategoryFragment_to_particularItemFragment"
+            app:destination="@id/particularItemFragment" />
+    </fragment>
     <fragment
         android:id="@+id/particularItemFragment"
         android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.ParticularItemFragment"
