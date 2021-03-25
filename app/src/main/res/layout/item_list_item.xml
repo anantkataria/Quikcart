@@ -40,14 +40,13 @@
                 android:layout_height="wrap_content">
 
                 <RatingBar
-                    android:layout_alignParentStart="true"
-                    android:layout_centerVertical="true"
                     android:id="@+id/ratingBar"
                     style="@style/Widget.AppCompat.RatingBar.Small"
-                    android:numStars="5"
-                    tools:rating="4.3"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:numStars="5"
+                    tools:rating="4.3" />
 
                 <TextView
                     tools:text="3303"
