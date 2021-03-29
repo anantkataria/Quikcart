@@ -15,11 +15,19 @@
         android:id="@+id/navigation_cart"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.cart.CartFragment"
         android:label="@string/title_cart"
-        tools:layout="@layout/fragment_cart" />
+        tools:layout="@layout/fragment_cart" >
+        <action
+            android:id="@+id/action_navigation_cart_to_checkoutFragment2"
+            app:destination="@id/checkoutFragment2" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_orders"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.orders.OrdersFragment"
         android:label="@string/title_orders"
         tools:layout="@layout/fragment_orders" />
+    <fragment
+        android:id="@+id/checkoutFragment2"
+        android:name="com.savage9ishere.tiwarimart.fragment_container.checkout.CheckoutFragment"
+        android:label="CheckoutFragment" />
 </navigation>

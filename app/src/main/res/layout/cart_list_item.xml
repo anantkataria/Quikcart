@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/item_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8dp"
+                tools:src="@tools:sample/avatars" />
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_margin="8dp"
+                android:layout_toEndOf="@+id/item_image">
+
+                <TextView
+                    android:id="@+id/item_name_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    tools:text="Item name 5 kg super saver" />
+
+                <TextView
+                    android:id="@+id/item_price_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_name_text_view"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    tools:text="₹ 5000" />
+
+                <TextView
+                    android:id="@+id/stock_availability_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/item_price_text_view"
+                    tools:text="In Stock."
+                    tools:textColor="@android:color/holo_green_dark" />
+
+                <TextView
+                    android:id="@+id/item_size_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/stock_availability_text_view"
+                    android:layout_marginTop="16dp"
+                    tools:text="@string/size_text" />
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl1">
+
+            <ImageButton
+                android:id="@+id/increment_image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="8dp"
+                android:layout_toEndOf="@+id/qty_count_text_view"
+                android:background="@color/purple_500"
+                android:src="@drawable/ic_add" />
+
+            <ImageButton
+                android:id="@+id/decrement_image_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_margin="8dp"
+                android:background="@color/purple_500"
+                android:src="@drawable/ic_remove" />
+
+            <TextView
+                android:id="@+id/qty_count_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/decrement_image_button"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                tools:text="0" />
+
+            <Button
+                android:id="@+id/save_for_later_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Save For later" />
+
+            <Button
+                android:id="@+id/delete_item_button"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@+id/save_for_later_button"
+                android:text="Delete" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+</layout>

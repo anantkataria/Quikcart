@@ -7,4 +7,8 @@ import kotlinx.parcelize.Parcelize
 data class Category(val name: String = "", val uri: String = "", val key : String = "") : Parcelable
 
 @Parcelize
-data class Item(val name: String = "",val qty: String = "", val price: String = "", val discount: String = "", val description: String = "", val deliveryDuration: String = "", val photosUrl: ArrayList<String> = ArrayList(), val key: String? = "", val ratingTotal: Long = 0L, val peopleRatingCount: Long = 0L) : Parcelable
+data class Item(val name: String = "", var size: String = "", var price: String = "", val discount: String = "", val description: String = "", val deliveryDuration: String = "", val photosUrl: ArrayList<String> = ArrayList(), val key: String? = "", val ratingTotal: Long = 0L, val peopleRatingCount: Long = 0L, var otherSizes: MutableMap<String, String> = mutableMapOf(), val inStock: Boolean = true) : Parcelable
+
+@Parcelize
+//todo can add photos functionality
+data class Review(val userName: String="", val ratingVal : Float = 0F, val reviewDescription: String = "", val useful: Int = 0, val key: String = "") : Parcelable

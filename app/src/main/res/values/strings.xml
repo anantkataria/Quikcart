@@ -10,4 +10,10 @@
     <string name="item_photo">item_photo</string>
     <string name="rupee_symbol">₹</string>
     <string name="get_it_by_thursday_march_18">Get it by <b>Thursday, May 18</b></string>
+    <string name="item_name_format">₹ %s</string>
+    <string name="mrp_format">MRP : ₹ %s</string>
+    <string name="save_format">Save ₹ %s</string>
+    <string name="delivery_format">Delivery in %s</string>
+    <string name="size_text"><b>Size</b> : 1kg</string>
+    <string name="subtotal_format">Subtotal (%d items): ₹ %d</string>
 </resources>

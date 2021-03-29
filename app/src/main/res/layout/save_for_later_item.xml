@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:id="@+id/rl1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:id="@+id/item_image"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                tools:src="@tools:sample/avatars" />
+
+            <RelativeLayout
+                android:layout_centerInParent="true"
+                android:layout_margin="8dp"
+                android:layout_toEndOf="@+id/item_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    tools:text="Item name 5 kg super saver"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:id="@+id/item_name_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    tools:text="₹ 5000"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_below="@id/item_name_text_view"
+                    android:id="@+id/item_price_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    tools:text="In stock."
+                    tools:textColor="@android:color/holo_green_dark"
+                    android:layout_below="@+id/item_price_text_view"
+                    android:id="@+id/stock_availability_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    tools:text="@string/size_text"
+                    android:layout_marginTop="16dp"
+                    android:layout_below="@id/stock_availability_text_view"
+                    android:id="@+id/item_size_text_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_toStartOf="@+id/move_to_cart_button"
+            android:layout_below="@id/rl1"
+            android:id="@+id/delete_item_button"
+            android:text="Delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/move_to_cart_button"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/rl1"
+            android:text="Move to cart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </RelativeLayout>
+</layout>

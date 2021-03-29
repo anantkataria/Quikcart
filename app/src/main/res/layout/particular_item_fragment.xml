@@ -2,6 +2,12 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
+    
+    <data>
+        <variable
+            name="viewModel"
+            type="com.savage9ishere.tiwarimart.fragment_container.particular_item.ParticularItemViewModel" />
+    </data>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -13,6 +19,7 @@
             tools:context=".fragment_container.particular_item.ParticularItemFragment">
 
             <TextView
+                android:text="@{viewModel.itemName}"
                 android:id="@+id/item_name_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,6 +36,7 @@
                 android:layout_marginEnd="8dp">
 
                 <RatingBar
+                    android:rating="@{viewModel.rating}"
                     android:id="@+id/rating_bar"
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
@@ -37,6 +45,7 @@
                     android:layout_centerVertical="true" />
 
                 <TextView
+                    android:text="@{viewModel.peopleRatingCount.toString()}"
                     android:id="@+id/rating_count_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -55,7 +64,9 @@
                 android:layout_below="@id/rating_relative_layout"
                 android:layout_margin="8dp" />
 
-            <RelativeLayout
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:id="@+id/size_relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -64,21 +75,26 @@
                 android:layout_marginEnd="8dp">
 
                 <TextView
+                    android:gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:id="@+id/size_hard_coded"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="SIZE"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <Spinner
+                    android:layout_weight="1"
                     android:id="@+id/size_spinner"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/size_hard_coded" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <TextView
+                android:text="@{@string/item_name_format(viewModel.itemPrice)}"
                 android:id="@+id/price_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -87,7 +103,7 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
                 android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                tools:text="₹5040" />
+                tools:text="₹ 5040" />
 
             <RelativeLayout
                 android:id="@+id/mrp_relative_layout"
@@ -98,12 +114,14 @@
                 android:layout_marginEnd="8dp">
 
                 <TextView
+                    android:text="@{@string/mrp_format(viewModel.mrpPrice)}"
                     android:id="@+id/mrp_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     tools:text="MRP : ₹ 10,000" />
 
                 <TextView
+                    android:text="@{@string/save_format(viewModel.savePrice)}"
                     android:id="@+id/save_text_view"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -115,15 +133,17 @@
             </RelativeLayout>
 
             <TextView
+                android:text="@{@string/delivery_format(viewModel.deliveryTimeText)}"
                 android:id="@+id/delivery_time_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/mrp_relative_layout"
                 android:layout_margin="8dp"
                 android:textColor="@android:color/holo_blue_light"
-                tools:text="DELIVERY BY THURSDAY" />
+                tools:text="DELIVERY IN 2 DAYS" />
 
             <TextView
+                android:text="@{viewModel.stockAvailability}"
                 android:id="@+id/stock_availability_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,27 +154,33 @@
                 android:textColor="@android:color/holo_green_dark"
                 tools:text="In stock." />
 
-            <RelativeLayout
+            <LinearLayout
+                android:gravity="center"
+                android:orientation="horizontal"
                 android:id="@+id/qty_relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/stock_availability_text_view"
+                android:layout_below="@id/item_description_details_text_view"
                 android:layout_margin="8dp">
 
                 <TextView
+                    android:gravity="end"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
                     android:id="@+id/qty_hard_coded"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:text="QTY"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                 <Spinner
+                    android:layout_weight="1"
                     android:id="@+id/qty_spinner"
-                    android:layout_width="match_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_toEndOf="@id/qty_hard_coded" />
 
-            </RelativeLayout>
+            </LinearLayout>
 
             <Button
                 android:id="@+id/buy_now_button"
@@ -224,10 +250,11 @@
             </RelativeLayout>
 
             <TextView
+                android:text="@{viewModel.itemDescription}"
                 android:id="@+id/item_description_details_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/delivery_address_relative_layout"
+                android:layout_below="@id/stock_availability_text_view"
                 android:layout_margin="8dp"
                 tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Dictumst quisque sagittis purus sit amet volutpat. Adipiscing elit duis tristique sollicitudin nibh sit amet. Faucibus purus in massa tempor nec feugiat. Quis enim lobortis scelerisque fermentum. Rutrum quisque non tellus orci ac auctor augue. In nisl nisi scelerisque eu. Mi bibendum neque egestas congue quisque egestas diam. Ut eu sem integer vitae justo eget magna fermentum iaculis. Facilisis magna etiam tempor orci eu.
 
@@ -235,19 +262,58 @@ Ut pharetra sit amet aliquam id. Lectus mauris ultrices eros in cursus. Sagittis
 
 Pretium quam vulputate dignissim suspendisse in est. Diam donec adipiscing tristique risus nec feugiat. Ut aliquam purus sit amet luctus venenatis. Dignissim suspendisse in est ante in nibh mauris cursus mattis. Id ornare arcu odio ut sem nulla pharetra diam. Sit amet venenatis urna cursus eget nunc scelerisque viverra mauris. Dolor purus non enim praesent elementum facilisis leo. Dolor morbi non arcu risus quis. Accumsan sit amet nulla facilisi. Varius vel pharetra vel turpis nunc eget lorem dolor. Orci eu lobortis elementum nibh tellus. Molestie at elementum eu facilisis." />
 
-            <TextView
-                android:id="@+id/customer_reviews_hard_coded"
-                android:layout_width="wrap_content"
+            <RelativeLayout
+                android:layout_marginTop="16dp"
+                android:id="@+id/customer_review_relative_layout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/item_description_details_text_view"
+                android:layout_below="@+id/delivery_address_relative_layout"
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Customer reviews"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+                android:layout_marginEnd="8dp">
+
+                <TextView
+                    android:id="@+id/customer_reviews_hard_coded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Customer reviews"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+                <RatingBar
+                    android:rating="@{viewModel.rating}"
+                    android:id="@+id/rating_bar2"
+                    style="@style/Widget.AppCompat.RatingBar.Small"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true" />
+
+                <TextView
+                    android:text="@{viewModel.peopleRatingCount.toString()}"
+                    android:id="@+id/rating_count_text_view2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_toStartOf="@id/rating_bar2"
+                    tools:text="5543" />
+
+            </RelativeLayout>
+
+            <Button
+                android:layout_margin="8dp"
+                android:text="Write a Review"
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/write_review_button"
+                android:layout_below="@id/customer_review_relative_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/customer_reviews_recycler_view"
-                android:layout_below="@+id/customer_reviews_hard_coded"
+                android:layout_below="@+id/write_review_button"
                 android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

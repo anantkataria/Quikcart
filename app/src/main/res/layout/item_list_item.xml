@@ -40,7 +40,9 @@
                 android:layout_height="wrap_content">
 
                 <RatingBar
+                    android:layout_centerVertical="true"
                     android:id="@+id/ratingBar"
+                    android:layout_marginEnd="8dp"
                     style="@style/Widget.AppCompat.RatingBar.Small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -49,6 +51,7 @@
                     tools:rating="4.3" />
 
                 <TextView
+                    android:layout_centerVertical="true"
                     tools:text="3303"
                     android:layout_toEndOf="@+id/ratingBar"
                     android:id="@+id/rating_count_text_view"

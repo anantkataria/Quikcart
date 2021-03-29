@@ -3,6 +3,7 @@ package com.savage9ishere.tiwarimart.fragment_container.particular_category
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.recyclerview.widget.DiffUtil
@@ -11,12 +12,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.savage9ishere.tiwarimart.databinding.ItemListItemBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Item
+import kotlin.math.absoluteValue
 
 class ItemsAdapter(private val onClick : (Item) -> Unit) : ListAdapter<Item, ItemsAdapter.ViewHolder>(ItemsDiffCallback()){
     class ViewHolder private constructor(val binding: ItemListItemBinding, val onClick: (Item) -> Unit): RecyclerView.ViewHolder(binding.root){
         private val itemImage: ImageView = binding.productImageView
         private val itemName : TextView = binding.productNameTextView
         private val ratingCountText : TextView = binding.ratingCountTextView
+        private val ratingBar : RatingBar = binding.ratingBar
         private val itemPrice : TextView = binding.priceTextView
         private val itemOriginalPrice: TextView = binding.originalPriceTextView
         private val saveAmountText: TextView = binding.saveAmountTextView
@@ -34,7 +37,7 @@ class ItemsAdapter(private val onClick : (Item) -> Unit) : ListAdapter<Item, Ite
 
         fun bind(item: Item) {
             currentItem = item
-            val itemNameStr = item.name + " " + item.qty
+            val itemNameStr = item.name + " " + item.size
             itemName.text = itemNameStr
 
 
@@ -43,7 +46,12 @@ class ItemsAdapter(private val onClick : (Item) -> Unit) : ListAdapter<Item, Ite
             val originalPriceStr = "₹" + item.price
             itemOriginalPrice.text = originalPriceStr
 
-            ratingCountText.text = item.peopleRatingCount.toString()
+            val totalRating = item.ratingTotal.toFloat()
+            val peopleRatingCount = item.peopleRatingCount.toFloat()
+            ratingCountText.text = totalRating.toString()
+            if(peopleRatingCount.toInt() != 0){
+                ratingBar.rating = (totalRating/peopleRatingCount)
+            }
 
             val originalPrice = item.price.toInt()
             val discount = item.discount.toInt()
