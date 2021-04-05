@@ -1,4 +1,4 @@
-package com.savage9ishere.tiwarimart.authentication.registration
+package com.savage9ishere.tiwarimart.checkout.payment
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
@@ -8,24 +8,24 @@ import android.view.View
 import android.view.ViewGroup
 import com.savage9ishere.tiwarimart.R
 
-class RegistrationFragment : Fragment() {
+class PaymentFragment : Fragment() {
 
     companion object {
-        fun newInstance() = RegistrationFragment()
+        fun newInstance() = PaymentFragment()
     }
 
-    private lateinit var viewModel: RegistrationViewModel
+    private lateinit var viewModel: PaymentViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.registration_fragment, container, false)
+        return inflater.inflate(R.layout.payment_fragment, container, false)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(RegistrationViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PaymentViewModel::class.java)
         // TODO: Use the ViewModel
     }
 

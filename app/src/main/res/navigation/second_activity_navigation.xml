@@ -22,15 +22,7 @@
         <action
             android:id="@+id/action_particularItemFragment_to_reviewFragment"
             app:destination="@id/reviewFragment" />
-        <action
-            android:id="@+id/action_particularItemFragment_to_checkoutFragment"
-            app:destination="@id/checkoutFragment" />
     </fragment>
-    <fragment
-        android:id="@+id/checkoutFragment"
-        android:name="com.savage9ishere.tiwarimart.fragment_container.checkout.CheckoutFragment"
-        android:label="checkout_fragment"
-        tools:layout="@layout/checkout_fragment" />
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.review.ReviewFragment"

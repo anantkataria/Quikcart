@@ -6,13 +6,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemDao
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemEntity
+import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Item
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Review
 import kotlinx.coroutines.launch
 
 private var quantity = 0
 
-class ParticularItemViewModel(val item: Item, private val database: CartItemDao, val categoryName: String) : ViewModel() {
+class ParticularItemViewModel(val item: Item, private val database: CartItemDao, private val categoryName: String) : ViewModel() {
+
+    private val _moveAheadToBuy = MutableLiveData<CartItems?>()
+    val moveAheadToBuy : LiveData<CartItems?>
+        get() = _moveAheadToBuy
 
     private val _itemName = MutableLiveData<String>()
     val itemName : LiveData<String>
@@ -145,5 +150,14 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
 
     fun doneDoneInserting() {
         _doneInserting.value = null
+    }
+
+    fun moveAheadToBuyItem() {
+        val cartItem = CartItems(item.name, item.size, item.price, quantity, item.photosUrl[0], item.key, categoryName)
+        _moveAheadToBuy.value = cartItem
+    }
+
+    fun doneMovingAhead() {
+        _moveAheadToBuy.value = null
     }
 }

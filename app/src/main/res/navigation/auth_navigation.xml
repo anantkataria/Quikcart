@@ -9,22 +9,5 @@
         android:id="@+id/loginOrRegisterFragment2"
         android:name="com.savage9ishere.tiwarimart.authentication.login_or_register.LoginOrRegisterFragment"
         android:label="login_or_register_fragment"
-        tools:layout="@layout/login_or_register_fragment" >
-        <action
-            android:id="@+id/action_loginOrRegisterFragment2_to_registrationFragment2"
-            app:destination="@id/registrationFragment2" />
-        <action
-            android:id="@+id/action_loginOrRegisterFragment2_to_storeClosedFragment"
-            app:destination="@id/storeClosedFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/registrationFragment2"
-        android:name="com.savage9ishere.tiwarimart.authentication.registration.RegistrationFragment"
-        android:label="registration_fragment"
-        tools:layout="@layout/registration_fragment" />
-    <fragment
-        android:id="@+id/storeClosedFragment"
-        android:name="com.savage9ishere.tiwarimart.authentication.store_closed.StoreClosedFragment"
-        android:label="store_closed_fragment"
-        tools:layout="@layout/store_closed_fragment" />
+        tools:layout="@layout/login_or_register_fragment" />
 </navigation>

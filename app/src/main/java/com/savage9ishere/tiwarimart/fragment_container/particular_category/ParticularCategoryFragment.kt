@@ -24,8 +24,6 @@ class ParticularCategoryFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
-        Log.e("aaccaacc", "oncreateview called")
-
         val binding = ParticularCategoryFragmentBinding.inflate(inflater)
 
         val bundle = requireActivity().intent.extras

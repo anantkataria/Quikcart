@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/checkout_navigation.xml"
+    app:startDestination="@id/addressFragment">
+
+    <fragment
+        android:id="@+id/addressFragment"
+        android:name="com.savage9ishere.tiwarimart.checkout.address.AddressFragment"
+        android:label="address_fragment"
+        tools:layout="@layout/address_fragment" >
+        <action
+            android:id="@+id/action_addressFragment_to_paymentFragment"
+            app:destination="@id/paymentFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/paymentFragment"
+        android:name="com.savage9ishere.tiwarimart.checkout.payment.PaymentFragment"
+        android:label="payment_fragment"
+        tools:layout="@layout/payment_fragment" />
+</navigation>

@@ -1,11 +1,14 @@
 package com.savage9ishere.tiwarimart.main_flow.ui.cart
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemDao
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemEntity
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.save_for_later_database.SaveForLaterDao
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.save_for_later_database.SaveForLaterEntity
+import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 import kotlinx.coroutines.launch
 
 class CartViewModel(private val cartItemsDatabase: CartItemDao,private val saveForLaterDatabase: SaveForLaterDao) : ViewModel() {
@@ -16,6 +19,10 @@ class CartViewModel(private val cartItemsDatabase: CartItemDao,private val saveF
     val subTotal = cartItemsDatabase.getSubTotal()
 
     val itemCountForSaveForLater = saveForLaterDatabase.getItemCount()
+
+    private val _moveAheadToBuy = MutableLiveData<ArrayList<CartItems>?>()
+    val moveAheadToBuy : LiveData<ArrayList<CartItems>?>
+        get() = _moveAheadToBuy
 
     fun onIncrementClick(cartItemEntity: CartItemEntity) {
         //increment item quantity by one and update in the database,
@@ -92,5 +99,18 @@ class CartViewModel(private val cartItemsDatabase: CartItemDao,private val saveF
             )
             cartItemsDatabase.insert(cartItem)
         }
+    }
+
+    fun moveAheadToBuyItems() {
+        val itemsArrayList = arrayListOf<CartItems>()
+        for (item in cartItems.value!!){
+            val cartItem = CartItems(item.itemName, item.itemSize, item.itemPrice.toString(), item.itemQty, item.photoUrl, item.itemKey, item.itemCategory)
+            itemsArrayList.add(cartItem)
+        }
+        _moveAheadToBuy.value = itemsArrayList
+    }
+
+    fun doneMovingAhead() {
+        _moveAheadToBuy.value = null
     }
 }

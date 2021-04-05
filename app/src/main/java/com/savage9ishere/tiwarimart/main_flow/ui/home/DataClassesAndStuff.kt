@@ -12,3 +12,6 @@ data class Item(val name: String = "", var size: String = "", var price: String 
 @Parcelize
 //todo can add photos functionality
 data class Review(val userName: String="", val ratingVal : Float = 0F, val reviewDescription: String = "", val useful: Int = 0, val key: String = "") : Parcelable
+
+@Parcelize
+data class CartItems(val name: String = "", val size: String = "", val price: String = "", val qty : Int, val photoUrl: String = "", val key: String? = "", val itemCategory: String = "") : Parcelable

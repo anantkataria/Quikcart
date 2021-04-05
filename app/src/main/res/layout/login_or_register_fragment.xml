@@ -3,15 +3,112 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <FrameLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".authentication.login_or_register.LoginOrRegisterFragment">
 
         <TextView
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:id="@+id/login_register_hard_coded"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Hello" />
+            android:layout_height="wrap_content"
+            android:text="Login/Register"
+            android:gravity="center"
+            android:textColor="@color/purple_500"
+            android:textSize="45sp"
+            android:layout_marginTop="32dp"/>
 
-    </FrameLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/country_code"
+            android:layout_marginTop="64dp"
+            android:layout_marginStart="16dp"
+            android:layout_below="@+id/login_register_hard_coded"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+            <com.google.android.material.textfield.TextInputEditText
+                android:text="+91"
+                android:enabled="false"
+                android:textColor="@android:color/black"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_marginTop="64dp"
+            android:layout_marginStart="8dp"
+            android:layout_toEndOf="@+id/country_code"
+            android:layout_marginEnd="16dp"
+            android:hint="Enter Your Phone Number"
+            android:id="@+id/phone_number_text_input_layout"
+            android:layout_below="@+id/login_register_hard_coded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:inputType="number"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:visibility="invisible"
+            android:id="@+id/change_number_button"
+            android:layout_below="@+id/phone_number_text_input_layout"
+            android:layout_centerHorizontal="true"
+            android:layout_marginEnd="16dp"
+            android:text="Change Number"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:visibility="invisible"
+            android:layout_marginTop="64dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:hint="OTP"
+            android:id="@+id/otp_text_input_layout"
+            android:layout_above="@+id/verify_otp_button"
+            android:layout_width="230dp"
+            android:layout_centerHorizontal="true"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:maxLength="6"
+                android:letterSpacing="1.2"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/get_otp_button"
+            android:text="Get OTP"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <Button
+            android:id="@+id/verify_otp_button"
+            android:visibility="invisible"
+            android:text="Verify OTP"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
 </layout>

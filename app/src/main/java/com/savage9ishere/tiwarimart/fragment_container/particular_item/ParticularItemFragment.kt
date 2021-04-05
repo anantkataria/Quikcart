@@ -1,5 +1,6 @@
 package com.savage9ishere.tiwarimart.fragment_container.particular_item
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,9 +12,14 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 import com.savage9ishere.tiwarimart.R
+import com.savage9ishere.tiwarimart.authentication.AuthActivity
+import com.savage9ishere.tiwarimart.checkout.CheckoutActivity
 import com.savage9ishere.tiwarimart.databinding.ParticularItemFragmentBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
+import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Item
 
 class ParticularItemFragment : Fragment() {
@@ -55,9 +61,7 @@ class ParticularItemFragment : Fragment() {
         }
 
         binding.buyNowButton.setOnClickListener {
-            val b = Bundle()
-            b.putParcelable("item", item)
-            findNavController().navigate(R.id.action_particularItemFragment_to_checkoutFragment, b)
+            viewModel.moveAheadToBuyItem()
         }
 
         binding.addToCartButton.setOnClickListener {
@@ -108,6 +112,39 @@ class ParticularItemFragment : Fragment() {
             }
 
         }
+
+        viewModel.moveAheadToBuy.observe(viewLifecycleOwner, {
+            it?.let {
+                val itemsList : ArrayList<CartItems> = arrayListOf()
+                itemsList.add(it)
+
+                val auth = Firebase.auth
+                val user = auth.currentUser
+
+                val b = Bundle()
+
+                if(user.phoneNumber.isEmpty() || user.phoneNumber == null){
+                    //user is not logged in
+                    //send to loginOrRegisterFragment
+                    b.putBoolean("fromCart", true)
+                    b.putBoolean("fromDirect", false)
+                    b.putBoolean("fromProfile", false)
+                    b.putParcelableArrayList("itemsList", itemsList)
+                    val intent = Intent(this.activity, AuthActivity::class.java)
+                    intent.putExtras(b)
+                    startActivity(intent)
+                }
+                else {
+                    //user is signed in
+                    //send directly to checkout
+                    b.putParcelableArrayList("itemsList", itemsList)
+                    val intent = Intent(this.activity, CheckoutActivity::class.java)
+                    intent.putExtras(b)
+                    startActivity(intent)
+                }
+                viewModel.doneMovingAhead()
+            }
+        })
 
         viewModel.doneInserting.observe(viewLifecycleOwner, {
             it?.let {
