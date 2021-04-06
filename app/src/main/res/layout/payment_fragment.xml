@@ -1,13 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".checkout.payment.PaymentFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Hello" />
+        android:layout_height="match_parent">
 
-</FrameLayout>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:context=".checkout.payment.PaymentFragment">
+
+            <TextView
+                android:id="@+id/payment_method_hard_coded"
+                android:text="Select Payment Method"
+                android:gravity="center"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/purple_500"
+                android:layout_margin="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:layout_margin="8dp"
+                android:text="Cash On Delivery"
+                style="?android:attr/buttonBarButtonStyle"
+                android:id="@+id/cod_button"
+                android:layout_below="@+id/payment_method_hard_coded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <Button
+                android:text="UPI"
+                android:id="@+id/upi_button"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                style="?android:attr/buttonBarButtonStyle"
+                android:layout_below="@+id/cod_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</layout>

@@ -15,6 +15,9 @@ data class CartItemEntity(
     @ColumnInfo(name = "item_price")
     val itemPrice: Int = 0,
 
+    @ColumnInfo(name = "item_price_original")
+    val itemPriceOriginal: Int = 0,
+
     @ColumnInfo(name = "item_size")
     val itemSize: String = "",
 

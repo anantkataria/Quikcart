@@ -15,7 +15,21 @@
             android:layout_height="wrap_content"
             tools:context=".checkout.address.AddressFragment">
 
+            <TextView
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                android:textColor="@color/purple_500"
+                android:text="Select Address"
+                android:gravity="center"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:id="@+id/select_address_hard_coded"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
             <androidx.recyclerview.widget.RecyclerView
+                android:layout_below="@+id/select_address_hard_coded"
                 android:id="@+id/address_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
@@ -23,7 +37,7 @@
             <Button
                 android:id="@+id/add_new_address_button"
                 android:text="Add new Address"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="64dp"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 style="?android:attr/buttonBarButtonStyle"

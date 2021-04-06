@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.databinding.AddressFragmentBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
+import com.savage9ishere.tiwarimart.main_flow.ui.home.AddressItem
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 
 class AddressFragment : Fragment() {
@@ -66,8 +67,12 @@ class AddressFragment : Fragment() {
 
         viewModel.onDeliverToThisAddress.observe(viewLifecycleOwner, {
             it?.let {
-                Toast.makeText(context, "deliver to this address", Toast.LENGTH_SHORT).show()
-                //todo
+                val b = Bundle()
+                val addressItem = AddressItem(it.fullName, it.mobileNumber, it.pinCode, it.flatHouseNoName, it.areaColonyStreet, it.landmark, it.townCity, it.state, it.deliveryInstructions)
+                b.putParcelable("address", addressItem)
+                b.putParcelableArrayList("itemsList", itemsList)
+                findNavController().navigate(R.id.action_addressFragment_to_paymentFragment, b)
+                viewModel.doneOnDeliverToThisAddress()
             }
         })
 

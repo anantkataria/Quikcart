@@ -9,11 +9,9 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
-import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.authentication.AuthActivity
 import com.savage9ishere.tiwarimart.checkout.CheckoutActivity
 import com.savage9ishere.tiwarimart.databinding.FragmentCartBinding
@@ -81,7 +79,6 @@ class CartFragment : Fragment() {
                 val b = Bundle()
 
                 if(user!!.phoneNumber == null){
-                    Log.e("84", "authentication activity will be called")
                     //user is not logged in
                     //send to loginOrRegisterFragment
                     b.putBoolean("fromCart", true)
@@ -118,6 +115,12 @@ class CartFragment : Fragment() {
                     binding.cartItemsRecyclerView.visibility = View.GONE
                 }
             }
+            if(it == null){
+                binding.subtotalText.visibility = View.GONE
+                binding.proceedToBuyButton.visibility = View.GONE
+                binding.cartItemsRecyclerView.visibility = View.GONE
+            }
+
         })
 
         viewModel.itemCountForSaveForLater.observe(viewLifecycleOwner, {

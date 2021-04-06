@@ -1,6 +1,5 @@
 package com.savage9ishere.tiwarimart.main_flow.ui.cart
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Button
@@ -12,7 +11,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.databinding.CartListItemBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemEntity
 

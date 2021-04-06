@@ -104,7 +104,7 @@ class CartViewModel(private val cartItemsDatabase: CartItemDao,private val saveF
     fun moveAheadToBuyItems() {
         val itemsArrayList = arrayListOf<CartItems>()
         for (item in cartItems.value!!){
-            val cartItem = CartItems(item.itemName, item.itemSize, item.itemPrice.toString(), item.itemQty, item.photoUrl, item.itemKey, item.itemCategory)
+            val cartItem = CartItems(item.itemName, item.itemSize, item.itemPrice.toString(), item.itemPriceOriginal.toString(),item.itemQty, item.photoUrl, item.itemKey, item.itemCategory)
             itemsArrayList.add(cartItem)
         }
         _moveAheadToBuy.value = itemsArrayList

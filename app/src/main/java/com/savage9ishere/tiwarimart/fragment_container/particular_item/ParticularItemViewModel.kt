@@ -35,8 +35,6 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
     val itemImages : LiveData<ArrayList<String>>
         get() = _itemImages
 
-    //todo setting spinner for size
-
     private val _itemPrice = MutableLiveData<String>()
     val itemPrice : LiveData<String>
         get() = _itemPrice
@@ -57,7 +55,6 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
     val stockAvailability: LiveData<String>
         get() = _stockAvailability
 
-    //todo setting spinner for qty
     //todo setting for address
     //todo secure transaction setting
 
@@ -135,6 +132,7 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
 
         val cartItem = CartItemEntity(itemName = item.name + " " + item.size,
         itemPrice = price,
+        itemPriceOriginal = originalPrice,
         itemSize = item.size,
         itemQty = quantity,
         stockAvailability = item.inStock,
@@ -153,7 +151,9 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
     }
 
     fun moveAheadToBuyItem() {
-        val cartItem = CartItems(item.name, item.size, item.price, quantity, item.photosUrl[0], item.key, categoryName)
+        val originalPrice = item.price.toInt()
+        val discountPrice = originalPrice - (originalPrice*item.discount.toInt()/100)
+        val cartItem = CartItems(item.name, item.size, discountPrice.toString(), originalPrice.toString(), quantity, item.photosUrl[0], item.key, categoryName)
         _moveAheadToBuy.value = cartItem
     }
 
