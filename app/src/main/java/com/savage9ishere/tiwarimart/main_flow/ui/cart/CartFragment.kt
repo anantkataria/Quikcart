@@ -80,7 +80,7 @@ class CartFragment : Fragment() {
 
                 val b = Bundle()
 
-                if(user.phoneNumber.isEmpty() || user.phoneNumber == null){
+                if(user!!.phoneNumber == null){
                     Log.e("84", "authentication activity will be called")
                     //user is not logged in
                     //send to loginOrRegisterFragment

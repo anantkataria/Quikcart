@@ -13,10 +13,18 @@
         <action
             android:id="@+id/action_addressFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
+        <action
+            android:id="@+id/action_addressFragment_to_addNewAddressFragment"
+            app:destination="@id/addNewAddressFragment" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.savage9ishere.tiwarimart.checkout.payment.PaymentFragment"
         android:label="payment_fragment"
         tools:layout="@layout/payment_fragment" />
+    <fragment
+        android:id="@+id/addNewAddressFragment"
+        android:name="com.savage9ishere.tiwarimart.checkout.address.new_address.AddNewAddressFragment"
+        android:label="add_new_address_fragment"
+        tools:layout="@layout/add_new_address_fragment" />
 </navigation>
