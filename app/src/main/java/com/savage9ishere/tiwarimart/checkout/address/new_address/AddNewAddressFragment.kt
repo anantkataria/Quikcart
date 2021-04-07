@@ -48,6 +48,9 @@ class AddNewAddressFragment : Fragment() {
             if(fullName.isEmpty() || mobileNumber.isEmpty() || pinCode.isEmpty() || flatHouseNoName.isEmpty() || areaColonyStreet.isEmpty() || landMark.isEmpty() || townCity.isEmpty() || state!!.isEmpty()){
                 Toast.makeText(context, "Something is Missing", Toast.LENGTH_SHORT).show()
             }
+            else if(state == "Select State"){
+                Toast.makeText(context, "Select state", Toast.LENGTH_SHORT).show()
+            }
             else {
                 val address = AddressEntity(fullName = fullName, mobileNumber = mobileNumber, pinCode = pinCode, flatHouseNoName = flatHouseNoName, areaColonyStreet = areaColonyStreet, landmark = landMark, townCity = townCity, state = state!!, deliveryInstructions = "None")
                 viewModel.addAddress(address)

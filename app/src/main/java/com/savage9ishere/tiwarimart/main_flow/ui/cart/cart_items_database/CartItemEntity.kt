@@ -34,5 +34,8 @@ data class CartItemEntity(
     val itemKey: String? = "",
 
     @ColumnInfo(name = "item_category")
-    val itemCategory: String = ""
+    val itemCategory: String = "",
+
+    @ColumnInfo(name = "delivery_duration")
+    val deliveryDuration: String = ""
 )

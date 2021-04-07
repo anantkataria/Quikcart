@@ -138,7 +138,8 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
         stockAvailability = item.inStock,
         photoUrl = item.photosUrl[0],
         itemKey = item.key,
-        itemCategory = categoryName)
+        itemCategory = categoryName,
+        deliveryDuration = item.deliveryDuration)
 
         viewModelScope.launch {
             database.insert(cartItem)
@@ -153,7 +154,7 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
     fun moveAheadToBuyItem() {
         val originalPrice = item.price.toInt()
         val discountPrice = originalPrice - (originalPrice*item.discount.toInt()/100)
-        val cartItem = CartItems(item.name, item.size, discountPrice.toString(), originalPrice.toString(), quantity, item.photosUrl[0], item.key, categoryName)
+        val cartItem = CartItems(item.name, item.size, discountPrice.toString(), originalPrice.toString(), quantity, item.photosUrl[0], item.key, categoryName, item.deliveryDuration)
         _moveAheadToBuy.value = cartItem
     }
 

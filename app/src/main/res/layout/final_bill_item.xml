@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+
+        <ImageView
+            android:layout_centerVertical="true"
+            android:id="@+id/product_image_view"
+            android:layout_alignParentStart="true"
+            tools:src="@tools:sample/avatars"
+            android:layout_width="120dp"
+            android:layout_marginEnd="6dp"
+            android:layout_height="120dp"
+            android:contentDescription="@string/item_photo" />
+
+        <RelativeLayout
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/product_image_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/product_name_text_view"
+                tools:text="IRONMAN Avatar Pack of 5 Silver badge Edition"
+                android:textColor="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <RelativeLayout
+                android:layout_below="@id/product_name_text_view"
+                android:id="@+id/placeholder_relative_layout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/rupee_symbol"
+                    android:text="@string/rupee_symbol"
+                    android:layout_centerVertical="true"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    android:layout_toEndOf="@id/rupee_symbol"
+                    android:textSize="20sp"
+                    android:textColor="@android:color/holo_red_dark"
+                    tools:text="545"
+                    android:id="@+id/price_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+                <TextView
+                    tools:text="₹600"
+                    android:layout_marginStart="8dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/price_text_view"
+                    android:id="@+id/original_price_text_view"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/save_amount_text_view"
+                tools:text="Save ₹55 (15%)"
+                android:layout_below="@+id/placeholder_relative_layout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/delivery_time_approximate_text_view"
+                tools:text="@string/get_it_by_thursday_march_18"
+                android:layout_below="@+id/save_amount_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

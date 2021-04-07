@@ -59,7 +59,7 @@ class ItemsAdapter(private val onClick : (Item) -> Unit) : ListAdapter<Item, Ite
             itemPrice.text = "$price"
 
             val saveAmount =
-                "Save ₹" + (originalPrice * discount / 100).toString() + " (${discount.toString()}%)"
+                "Save ₹" + (originalPrice * discount / 100).toString() + " ($discount%)"
             saveAmountText.text = saveAmount
 
             val str = "Delivery in " + item.deliveryDuration

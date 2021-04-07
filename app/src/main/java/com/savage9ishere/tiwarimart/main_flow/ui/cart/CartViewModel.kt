@@ -60,12 +60,14 @@ class CartViewModel(private val cartItemsDatabase: CartItemDao,private val saveF
             cartItemsDatabase.delete(cartItemEntity)
             val saveForLaterItem = SaveForLaterEntity(itemName = cartItemEntity.itemName,
             itemPrice = cartItemEntity.itemPrice,
+            itemPriceOriginal = cartItemEntity.itemPriceOriginal,
             itemSize = cartItemEntity.itemSize,
             itemQty = cartItemEntity.itemQty,
             stockAvailability = cartItemEntity.stockAvailability,
             photoUrl = cartItemEntity.photoUrl,
             itemKey = cartItemEntity.itemKey,
-            itemCategory = cartItemEntity.itemCategory)
+            itemCategory = cartItemEntity.itemCategory,
+            deliveryDuration = cartItemEntity.deliveryDuration)
 
             saveForLaterDatabase.insert(saveForLaterItem)
         }
@@ -90,12 +92,14 @@ class CartViewModel(private val cartItemsDatabase: CartItemDao,private val saveF
             val cartItem = CartItemEntity(
                 itemName = saveForLaterEntity.itemName,
                 itemPrice = saveForLaterEntity.itemPrice,
+                itemPriceOriginal = saveForLaterEntity.itemPriceOriginal,
                 itemSize = saveForLaterEntity.itemSize,
                 itemQty = saveForLaterEntity.itemQty,
                 stockAvailability = saveForLaterEntity.stockAvailability,
                 photoUrl = saveForLaterEntity.photoUrl,
                 itemKey = saveForLaterEntity.itemKey,
-                itemCategory = saveForLaterEntity.itemCategory
+                itemCategory = saveForLaterEntity.itemCategory,
+                deliveryDuration = saveForLaterEntity.deliveryDuration
             )
             cartItemsDatabase.insert(cartItem)
         }
@@ -104,7 +108,7 @@ class CartViewModel(private val cartItemsDatabase: CartItemDao,private val saveF
     fun moveAheadToBuyItems() {
         val itemsArrayList = arrayListOf<CartItems>()
         for (item in cartItems.value!!){
-            val cartItem = CartItems(item.itemName, item.itemSize, item.itemPrice.toString(), item.itemPriceOriginal.toString(),item.itemQty, item.photoUrl, item.itemKey, item.itemCategory)
+            val cartItem = CartItems(item.itemName, item.itemSize, item.itemPrice.toString(), item.itemPriceOriginal.toString(),item.itemQty, item.photoUrl, item.itemKey, item.itemCategory, item.deliveryDuration)
             itemsArrayList.add(cartItem)
         }
         _moveAheadToBuy.value = itemsArrayList

@@ -7,9 +7,9 @@ import com.savage9ishere.tiwarimart.main_flow.ui.home.AddressItem
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 
 class FinalBillViewModel(
-    private val listItems: ArrayList<CartItems>,
-    private val address: AddressItem,
-    private val paymentMethod: String
+    listItems: ArrayList<CartItems>,
+    val address: AddressItem,
+    paymentMethod: String
 ) : ViewModel() {
 
     private val _itemAddress = MutableLiveData<String?>()
@@ -24,9 +24,17 @@ class FinalBillViewModel(
     val billAmountTotal: LiveData<String?>
         get() = _billAmountTotal
 
+    private val _billAmountTotalOriginal = MutableLiveData<String?>()
+    val billAmountTotalOriginal : LiveData<String?>
+        get() = _billAmountTotalOriginal
+
     private val _deliveryCharge = MutableLiveData<String?>()
     val deliveryCharge: LiveData<String?>
         get() = _deliveryCharge
+
+    private val _billAmountWithDeliveryCharge = MutableLiveData<String?>()
+    val billAmountWithDeliveryCharge : LiveData<String?>
+        get() = _billAmountWithDeliveryCharge
 
     private val _totalSavings = MutableLiveData<String?>()
     val totalSavings : LiveData<String?>
@@ -39,5 +47,77 @@ class FinalBillViewModel(
     private val _cartItems = MutableLiveData<List<CartItems>?>()
     val cartItems : LiveData<List<CartItems>?>
         get() = _cartItems
+
+    init {
+        val address = address.getAddress()
+        _itemAddress.value = address
+
+        val deliveryDurations = Array(listItems.size){""}
+        for(i in deliveryDurations.indices){
+            deliveryDurations[i] = listItems[i].deliveryDuration
+        }
+
+        val durationInt = Array(deliveryDurations.size){0}
+        for(i in durationInt.indices){
+            val duration = deliveryDurations[i]
+            val timeUnit = duration.substring(duration.indexOf(" ")+1)
+            val time = duration.substringBefore(" ").toInt()
+            when (timeUnit) {
+                "Minutes" -> {
+                    durationInt[i] = time
+                }
+                "Hours" -> {
+                    durationInt[i] = time * 60
+                }
+                else -> {
+                    durationInt[i] = time * 60 * 24
+                }
+            }
+        }
+
+        var max = 0
+        for(duration in durationInt){
+            if(duration > max) max = duration
+        }
+
+        var deliveryTime = "$max Minutes"
+
+        if(max in 101..1439){
+            max /= 60
+            deliveryTime = "$max Hours"
+        }
+        else if(max > 1439){
+            max /= 1440
+            deliveryTime = "$max Days"
+        }
+
+        _deliveryTime.value = deliveryTime
+
+        var billAmountTotal = 0
+        var billTotalOriginal = 0
+        for (item in listItems){
+            billAmountTotal += item.price.toInt()
+            billTotalOriginal += item.priceOriginal.toInt()
+        }
+
+        _billAmountTotal.value = billAmountTotal.toString()
+        _billAmountTotalOriginal.value = billTotalOriginal.toString()
+
+        _totalSavings.value = (billTotalOriginal - billAmountTotal).toString()
+
+
+        if(billAmountTotal > 499){
+            _deliveryCharge.value = "0"
+        }
+        else {
+            _deliveryCharge.value = "40"
+        }
+
+        _billAmountWithDeliveryCharge.value = (_billAmountTotal.value!!.toInt() + _deliveryCharge.value!!.toInt()).toString()
+        _paymentMethodd.value = paymentMethod
+
+        _cartItems.value = listItems
+
+    }
 
 }

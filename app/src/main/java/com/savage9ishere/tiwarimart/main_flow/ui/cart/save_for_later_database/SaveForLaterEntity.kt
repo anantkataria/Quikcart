@@ -15,6 +15,9 @@ data class SaveForLaterEntity(
     @ColumnInfo(name = "item_price")
     val itemPrice: Int = 0,
 
+    @ColumnInfo(name = "item_price_original")
+    val itemPriceOriginal: Int = 0,
+
     @ColumnInfo(name = "item_size")
     val itemSize: String = "",
 
@@ -31,5 +34,8 @@ data class SaveForLaterEntity(
     val itemKey: String? = "",
 
     @ColumnInfo(name = "item_category")
-    val itemCategory: String = ""
+    val itemCategory: String = "",
+
+    @ColumnInfo(name = "delivery_duration")
+    val deliveryDuration : String = ""
 )

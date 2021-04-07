@@ -14,7 +14,12 @@ data class Item(val name: String = "", var size: String = "", var price: String 
 data class Review(val userName: String="", val ratingVal : Float = 0F, val reviewDescription: String = "", val useful: Int = 0, val key: String = "") : Parcelable
 
 @Parcelize
-data class CartItems(val name: String = "", val size: String = "", val price: String = "", val priceOriginal: String = "", val qty : Int, val photoUrl: String = "", val key: String? = "", val itemCategory: String = "") : Parcelable
+data class CartItems(val name: String = "", val size: String = "", val price: String = "", val priceOriginal: String = "", val qty : Int, val photoUrl: String = "", val key: String? = "", val itemCategory: String = "", val deliveryDuration: String = "") : Parcelable
 
 @Parcelize
-data class AddressItem(val fullName: String = "", val mobileNumber: String = "", val pinCode: String = "", val flatHouseNoName: String = "", val areaColonyStreet: String = "", val landMark : String = "", val townCity : String = "", val state : String = "", val deliveryInstructions: String = "") : Parcelable
+data class AddressItem(val fullName: String = "", val mobileNumber: String = "", val pinCode: String = "", val flatHouseNoName: String = "", val areaColonyStreet: String = "", val landMark : String = "", val townCity : String = "", val state : String = "", val deliveryInstructions: String = "") : Parcelable{
+
+    fun getAddress() : String {
+        return "$fullName\n$mobileNumber\n$flatHouseNoName,\n$areaColonyStreet, $landMark\n$townCity, $pinCode\n$state"
+    }
+}

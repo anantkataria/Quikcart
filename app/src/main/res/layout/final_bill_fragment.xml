@@ -29,6 +29,7 @@
                 android:textColor="@color/purple_500" />
 
             <TextView
+                android:text="@{@string/item_address_format(viewModel.itemAddress)}"
                 android:id="@+id/shipping_address_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,6 +39,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
+                android:text="@{@string/item_delivery_time_format(viewModel.deliveryTime)}"
                 android:id="@+id/delivery_time_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -46,6 +48,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
+                android:text="@{@string/item_bill_amount_format(viewModel.billAmountTotal, viewModel.deliveryCharge, viewModel.billAmountWithDeliveryCharge)}"
                 android:id="@+id/bill_amount_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,6 +58,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
+                android:text="@{@string/item_save_amount_format(viewModel.totalSavings)}"
                 android:id="@+id/save_amount_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,6 +67,7 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
+                android:text="@{@string/item_payment_method_format(viewModel.paymentMethodd)}"
                 android:id="@+id/payment_method_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -72,11 +77,17 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
+                android:layout_marginTop="32dp"
+                android:text="Items"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@android:color/black"
                 android:id="@+id/items_hard_coded"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/payment_method_text_view"
-                android:layout_margin="8dp" />
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/items_recycler_view"

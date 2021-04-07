@@ -16,4 +16,9 @@
     <string name="delivery_format">Delivery in %s</string>
     <string name="size_text"><b>Size</b> : 1kg</string>
     <string name="subtotal_format">Subtotal (%d items): ₹ %d</string>
+    <string name="item_address_format">Shipping to: <b>%s</b></string>
+    <string name="item_delivery_time_format">Guaranteed delivery: <b>%s</b></string>
+    <string name="item_bill_amount_format">Items:              ₹ %s\nDelivery:           ₹ %s\nTotal:              ₹ %s</string>
+    <string name="item_save_amount_format">Your Savings: ₹ %s</string>
+    <string name="item_payment_method_format">Payment Method: %s</string>
 </resources>
