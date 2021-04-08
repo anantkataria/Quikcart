@@ -3,13 +3,20 @@ package com.savage9ishere.tiwarimart.checkout.final_bill
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
+import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemDao
 import com.savage9ishere.tiwarimart.main_flow.ui.home.AddressItem
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
+import kotlinx.coroutines.launch
 
 class FinalBillViewModel(
-    listItems: ArrayList<CartItems>,
+    private val listItems: ArrayList<CartItems>,
     val address: AddressItem,
-    paymentMethod: String
+    private val paymentMethod: String,
+    val cartDatabase: CartItemDao
 ) : ViewModel() {
 
     private val _itemAddress = MutableLiveData<String?>()
@@ -120,4 +127,33 @@ class FinalBillViewModel(
 
     }
 
+    private val _orderPlacedSuccessfully = MutableLiveData<Boolean?>()
+    val orderPlacedSuccessfully : LiveData<Boolean?>
+        get() = _orderPlacedSuccessfully
+
+    fun placeOrder() {
+        val databaseRef = Firebase.database.reference
+        val auth = Firebase.auth
+        val user = auth.currentUser
+        val phoneNumber = user!!.phoneNumber
+
+        val orderRef = databaseRef.child("orders").child(phoneNumber!!)
+        val key = orderRef.push().key ?: return
+
+        val item = OrderItem(listItems, address, paymentMethod, key, System.currentTimeMillis())
+
+        orderRef.child(key).setValue(item).addOnCompleteListener {
+            viewModelScope.launch {
+                cartDatabase.deleteAllItems()
+            }
+            _orderPlacedSuccessfully.value = it.isSuccessful
+        }
+    }
+
+    fun doneOrderPlaced() {
+        _orderPlacedSuccessfully.value = null
+    }
+
 }
+
+data class OrderItem(val listItems: ArrayList<CartItems> = arrayListOf(), val address: AddressItem = AddressItem(), val paymentMethod : String = "", val orderKey : String = "", val orderPlacedTime : Long = 0L, val orderDeliveredOrCancelledTime : Long = 0L)

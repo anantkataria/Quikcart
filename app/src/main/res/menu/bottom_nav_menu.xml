@@ -12,8 +12,8 @@
         android:title="@string/title_cart" />
 
     <item
-        android:id="@+id/navigation_orders"
-        android:icon="@drawable/ic_orders"
-        android:title="@string/title_orders" />
+        android:id="@+id/navigation_user"
+        android:icon="@drawable/ic_user"
+        android:title="@string/user" />
 
 </menu>

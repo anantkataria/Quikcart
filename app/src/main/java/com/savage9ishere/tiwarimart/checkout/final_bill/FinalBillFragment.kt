@@ -1,13 +1,17 @@
 package com.savage9ishere.tiwarimart.checkout.final_bill
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.savage9ishere.tiwarimart.databinding.FinalBillFragmentBinding
+import com.savage9ishere.tiwarimart.main_flow.MainActivity
+import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
 import com.savage9ishere.tiwarimart.main_flow.ui.home.AddressItem
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 
@@ -26,7 +30,10 @@ class FinalBillFragment : Fragment() {
         val address : AddressItem? = requireArguments().getParcelable("address")
         val paymentMethod : String? = requireArguments().getString("paymentMethod")
 
-        val viewModelFactory = FinalBillViewModelFactory(itemsList!!, address!!, paymentMethod!!)
+        val application = requireNotNull(this.activity).application
+        val cartDataSource = CartItemsDatabase.getInstance(application).cartItemDao
+
+        val viewModelFactory = FinalBillViewModelFactory(itemsList!!, address!!, paymentMethod!!, cartDataSource)
         viewModel = ViewModelProvider(this, viewModelFactory).get(FinalBillViewModel::class.java)
 
         binding.viewModel = viewModel
@@ -36,8 +43,23 @@ class FinalBillFragment : Fragment() {
         binding.itemsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         binding.placeOrderButton.setOnClickListener {
-            //todo
+            viewModel.placeOrder()
         }
+
+        viewModel.orderPlacedSuccessfully.observe(viewLifecycleOwner, {
+            it?.let {
+                if(it){
+                    Toast.makeText(context, "Order Placed Successfully", Toast.LENGTH_LONG).show()
+                    val intent = Intent(requireActivity(), MainActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                    startActivity(intent)
+                }
+                else {
+                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_LONG).show()
+                }
+                viewModel.doneOrderPlaced()
+            }
+        })
 
         viewModel.cartItems.observe(viewLifecycleOwner, {
             it?.let {

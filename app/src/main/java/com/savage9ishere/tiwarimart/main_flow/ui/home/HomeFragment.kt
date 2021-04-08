@@ -5,13 +5,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.databinding.FragmentHomeBinding
@@ -42,7 +38,7 @@ class HomeFragment : Fragment() {
         binding.lifecycleOwner =this
         binding.viewmodel = homeViewModel
 
-        homeViewModel.categories.observe(viewLifecycleOwner, Observer {
+        homeViewModel.categories.observe(viewLifecycleOwner, {
             it?.let {
                 adapter.submitList(it.toList())
             }

@@ -28,4 +28,7 @@ interface CartItemDao {
     @Query("SELECT SUM(item_price*item_qty) FROM cart_item_table")
     fun getSubTotal() : LiveData<Int?>
 
+    @Query("DELETE FROM cart_item_table")
+    suspend fun deleteAllItems()
+
 }

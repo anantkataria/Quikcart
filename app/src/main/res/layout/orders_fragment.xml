@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".main_flow.ui.user.orders.OrdersFragment">
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/login_button"
+            android:layout_centerHorizontal="true"
+            android:text="Login"
+            android:layout_marginTop="32dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/login_text"
+            android:visibility="gone"
+            android:text="Login to see your orders"
+            android:gravity="center"
+            android:layout_below="@+id/login_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/current_orders_hard_coded"
+            android:text="Current Orders"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_margin="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/current_orders_recycler_view"
+            android:layout_below="@id/current_orders_hard_coded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:layout_margin="8dp"
+            android:id="@+id/previous_orders_hard_coded"
+            android:text="Previous Orders"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:layout_below="@id/current_orders_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/previous_orders_recycler_view"
+            android:layout_below="@id/previous_orders_hard_coded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </RelativeLayout>
+</layout>
