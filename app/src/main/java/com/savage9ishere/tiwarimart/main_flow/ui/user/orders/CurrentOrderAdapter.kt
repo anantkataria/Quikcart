@@ -16,6 +16,7 @@ class CurrentOrderAdapter(private val onClick : (OrderItem) -> Unit): ListAdapte
         private val orderPlacedTimeText : TextView = binding.orderPlacedTimeText
         private val orderItemsText : TextView = binding.orderItemsText
         private val orderTotalCostText : TextView = binding.orderTotalCostText
+        private val orderStatusText : TextView = binding.orderStatusTextView
 
         private var currentItem : OrderItem? = null
 
@@ -47,6 +48,9 @@ class CurrentOrderAdapter(private val onClick : (OrderItem) -> Unit): ListAdapte
 
             val totalS = "Total : ₹ $total"
             orderTotalCostText.text = totalS
+
+            val status  = "Order Status : " + item.status
+            orderStatusText.text = status
         }
 
         companion object {

@@ -24,9 +24,23 @@
         <action
             android:id="@+id/action_navigation_user_to_ordersFragment"
             app:destination="@id/ordersFragment" />
+        <action
+            android:id="@+id/action_navigation_user_to_feedbackFragment"
+            app:destination="@id/feedbackFragment" />
+        <action
+            android:id="@+id/action_navigation_user_to_aboutFragment"
+            app:destination="@id/aboutFragment" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.orders.OrdersFragment"
         android:label="OrdersFragment" />
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.feedback.FeedbackFragment"
+        android:label="FeedbackFragment" />
+    <fragment
+        android:id="@+id/aboutFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.about.AboutFragment"
+        android:label="AboutFragment" />
 </navigation>

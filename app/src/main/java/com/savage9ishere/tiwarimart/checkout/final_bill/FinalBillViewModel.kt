@@ -16,7 +16,7 @@ class FinalBillViewModel(
     private val listItems: ArrayList<CartItems>,
     val address: AddressItem,
     private val paymentMethod: String,
-    val cartDatabase: CartItemDao
+    private val cartDatabase: CartItemDao
 ) : ViewModel() {
 
     private val _itemAddress = MutableLiveData<String?>()
@@ -140,7 +140,7 @@ class FinalBillViewModel(
         val orderRef = databaseRef.child("orders").child(phoneNumber!!)
         val key = orderRef.push().key ?: return
 
-        val item = OrderItem(listItems, address, paymentMethod, key, System.currentTimeMillis())
+        val item = OrderItem(listItems, address, paymentMethod, key, System.currentTimeMillis(), 0L, "ORDER PROCESSING", user.phoneNumber!!)
 
         orderRef.child(key).setValue(item).addOnCompleteListener {
             viewModelScope.launch {
@@ -156,4 +156,4 @@ class FinalBillViewModel(
 
 }
 
-data class OrderItem(val listItems: ArrayList<CartItems> = arrayListOf(), val address: AddressItem = AddressItem(), val paymentMethod : String = "", val orderKey : String = "", val orderPlacedTime : Long = 0L, val orderDeliveredOrCancelledTime : Long = 0L)
+data class OrderItem(val listItems: ArrayList<CartItems> = arrayListOf(), val address: AddressItem = AddressItem(), val paymentMethod : String = "", val orderKey : String = "", val orderPlacedTime : Long = 0L, var orderDeliveredOrCancelledTime : Long = 0L, var status : String = "", val authPhone : String = "")

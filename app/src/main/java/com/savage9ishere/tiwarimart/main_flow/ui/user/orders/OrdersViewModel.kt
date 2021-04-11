@@ -45,7 +45,15 @@ class OrdersViewModel : ViewModel() {
                         snapshot: DataSnapshot,
                         previousChildName: String?
                     ) {
-                        TODO("Not yet implemented")
+                        val order = snapshot.getValue(OrderItem::class.java)
+                        for (i in currentItemsList.indices){
+                            val order2 = currentItemsList[i]
+                            if(order2.orderKey == order!!.orderKey){
+                                currentItemsList.removeAt(i)
+                                currentItemsList.add(i, order)
+                            }
+                        }
+                        _currentItems.value = currentItemsList
                     }
 
                     override fun onChildRemoved(snapshot: DataSnapshot) {

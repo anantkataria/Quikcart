@@ -43,7 +43,21 @@ class UserFragment : Fragment() {
     private fun onClick(item: ListItem) {
         when(item.name){
             "Orders" -> {
-                findNavController().navigate(R.id.action_navigation_user_to_ordersFragment)
+                if (findNavController().currentDestination?.id == R.id.navigation_user){
+                    findNavController().navigate(R.id.action_navigation_user_to_ordersFragment)
+                }
+            }
+
+            "Feedback" -> {
+                if (findNavController().currentDestination?.id == R.id.navigation_user) {
+                    findNavController().navigate(R.id.action_navigation_user_to_feedbackFragment)
+                }
+            }
+
+            "About" -> {
+                if (findNavController().currentDestination?.id == R.id.navigation_user) {
+                    findNavController().navigate(R.id.action_navigation_user_to_aboutFragment)
+                }
             }
         }
     }
