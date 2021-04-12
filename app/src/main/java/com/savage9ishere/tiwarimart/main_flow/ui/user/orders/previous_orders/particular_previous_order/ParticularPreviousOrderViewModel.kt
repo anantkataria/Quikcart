@@ -1,26 +1,22 @@
-package com.savage9ishere.tiwarimart.checkout.final_bill
+package com.savage9ishere.tiwarimart.main_flow.ui.user.orders.previous_orders.particular_previous_order
 
-import android.os.Parcelable
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
-import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemDao
 import com.savage9ishere.tiwarimart.main_flow.ui.home.AddressItem
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
-import kotlinx.coroutines.launch
-import kotlinx.parcelize.Parcelize
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
-class FinalBillViewModel(
-    private val listItems: ArrayList<CartItems>,
-    val address: AddressItem,
-    private val paymentMethod: String,
-    private val cartDatabase: CartItemDao
+class ParticularPreviousOrderViewModel(
+    listItems: ArrayList<CartItems>,
+    address: AddressItem,
+    paymentMethod: String,
+    orderPlacedTime: Long,
+    orderDeliveredOrCancelledTime: Long,
+    status: String
 ) : ViewModel() {
-
     private val _itemAddress = MutableLiveData<String?>()
     val itemAddress: LiveData<String?>
         get() = _itemAddress
@@ -57,9 +53,21 @@ class FinalBillViewModel(
     val cartItems : LiveData<List<CartItems>?>
         get() = _cartItems
 
+    private val _orderPlacedTime = MutableLiveData<String?>()
+    val orderPlacedTime : LiveData<String?>
+        get() = _orderPlacedTime
+
+    private val _orderDeliveredOrCancelledTime = MutableLiveData<String?>()
+    val orderDeliveredOrCancelledTime : LiveData<String?>
+        get() = _orderDeliveredOrCancelledTime
+
+    private val _status = MutableLiveData<String?>()
+    val status : LiveData<String?>
+        get() = _status
+
     init {
-        val address = address.getAddress()
-        _itemAddress.value = address
+        val addresss = address.getAddress()
+        _itemAddress.value = addresss
 
         val deliveryDurations = Array(listItems.size){""}
         for(i in deliveryDurations.indices){
@@ -127,36 +135,17 @@ class FinalBillViewModel(
 
         _cartItems.value = listItems
 
-    }
 
-    private val _orderPlacedSuccessfully = MutableLiveData<Boolean?>()
-    val orderPlacedSuccessfully : LiveData<Boolean?>
-        get() = _orderPlacedSuccessfully
+        val date = Date(orderPlacedTime)
+        val simpleDateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm")
+        simpleDateFormat.timeZone = TimeZone.getTimeZone("Asia/Kolkata")
+        _orderPlacedTime.value = simpleDateFormat.format(date)
 
-    fun placeOrder() {
-        val databaseRef = Firebase.database.reference
-        val auth = Firebase.auth
-        val user = auth.currentUser
-        val phoneNumber = user!!.phoneNumber
+        val dateP = Date(orderDeliveredOrCancelledTime)
+        _orderDeliveredOrCancelledTime.value = simpleDateFormat.format(dateP)
 
-        val orderRef = databaseRef.child("orders").child(phoneNumber!!)
-        val key = orderRef.push().key ?: return
+        _status.value = status
 
-        val item = OrderItem(listItems, address, paymentMethod, key, System.currentTimeMillis(), 0L, "ORDER PROCESSING", user.phoneNumber!!)
-
-        orderRef.child(key).setValue(item).addOnCompleteListener {
-            viewModelScope.launch {
-                cartDatabase.deleteAllItems()
-            }
-            _orderPlacedSuccessfully.value = it.isSuccessful
-        }
-    }
-
-    fun doneOrderPlaced() {
-        _orderPlacedSuccessfully.value = null
     }
 
 }
-
-@Parcelize
-data class OrderItem(val listItems: ArrayList<CartItems> = arrayListOf(), val address: AddressItem = AddressItem(), val paymentMethod : String = "", val orderKey : String = "", val orderPlacedTime : Long = 0L, var orderDeliveredOrCancelledTime : Long = 0L, var status : String = "", val authPhone : String = "") : Parcelable

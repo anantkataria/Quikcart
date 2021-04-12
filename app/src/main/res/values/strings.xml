@@ -21,5 +21,8 @@
     <string name="item_bill_amount_format">Items:              ₹ %s\nDelivery:           ₹ %s\nTotal:              ₹ %s</string>
     <string name="item_save_amount_format">Your Savings: ₹ %s</string>
     <string name="item_payment_method_format">Payment Method: %s</string>
+    <string name="item_order_placed_time_format">Order Placed: %s</string>
+    <string name="item_order_status_format">STATUS : %s</string>
+    <string name="item_order_delivered_or_cancelled_time_format">Order Delivered/Cancelled: %s</string>
     <string name="user">User</string>
 </resources>

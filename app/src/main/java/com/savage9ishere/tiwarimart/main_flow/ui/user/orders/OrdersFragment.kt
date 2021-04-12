@@ -7,9 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.savage9ishere.tiwarimart.R
+import com.savage9ishere.tiwarimart.checkout.final_bill.OrderItem
 import com.savage9ishere.tiwarimart.databinding.OrdersFragmentBinding
+import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
+import com.savage9ishere.tiwarimart.main_flow.ui.user.orders.previous_orders.PreviousOrderEntity
+import com.savage9ishere.tiwarimart.main_flow.ui.user.orders.previous_orders.PreviousOrdersAdapter
 
 class OrdersFragment : Fragment() {
 
@@ -22,12 +27,16 @@ class OrdersFragment : Fragment() {
     ): View {
         val binding = OrdersFragmentBinding.inflate(inflater)
 
-        viewModel = ViewModelProvider(this).get(OrdersViewModel::class.java)
+        val application = requireNotNull(this.activity).application
+        val previousOrdersDataSource = CartItemsDatabase.getInstance(application).previousOrderDao
+
+        val viewModelFactory = OrdersViewModelFactory(previousOrdersDataSource)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(OrdersViewModel::class.java)
 
         binding.lifecycleOwner = this
 
         val currentOrderAdapter = CurrentOrderAdapter{
-            currentOrderClick()
+            currentOrderClick(it)
         }
         binding.currentOrdersRecyclerView.adapter = currentOrderAdapter
         binding.currentOrdersRecyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, true)
@@ -35,6 +44,18 @@ class OrdersFragment : Fragment() {
         viewModel.currentItems.observe(viewLifecycleOwner, {
             it?.let {
                 currentOrderAdapter.submitList(it.toList())
+            }
+        })
+
+        val previousOrderAdapter = PreviousOrdersAdapter {
+            previousOrderClick(it)
+        }
+        binding.previousOrdersRecyclerView.adapter = previousOrderAdapter
+        binding.previousOrdersRecyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+
+        viewModel.previousOrderItems.observe(viewLifecycleOwner, {
+            it?.let {
+                previousOrderAdapter.submitList(it)
             }
         })
 
@@ -63,8 +84,27 @@ class OrdersFragment : Fragment() {
         return binding.root
     }
 
-    private fun currentOrderClick() {
-        Toast.makeText(context, "current item clicked", Toast.LENGTH_SHORT).show()
+    private fun previousOrderClick(it: PreviousOrderEntity) {
+        val b = Bundle()
+        val orderItem = OrderItem(listItems = it.listItems, address = it.address, paymentMethod = it.paymentMethod, orderKey = it.orderKey, orderPlacedTime = it.orderPlacedTime, orderDeliveredOrCancelledTime = it.orderDeliveredOrCancelledTime, status = it.status)
+        b.putParcelable("orderItem", orderItem)
+        if (findNavController().currentDestination?.id == R.id.ordersFragment) {
+            findNavController().navigate(
+                R.id.action_ordersFragment_to_particularPreviousOrderFragment,
+                b
+            )
+        }
+    }
+
+    private fun currentOrderClick(orderItem: OrderItem) {
+        val b = Bundle()
+        b.putParcelable("orderItem", orderItem)
+        if (findNavController().currentDestination?.id == R.id.ordersFragment) {
+            findNavController().navigate(
+                R.id.action_ordersFragment_to_particularCurrentOrderFragment,
+                b
+            )
+        }
     }
 
 }
