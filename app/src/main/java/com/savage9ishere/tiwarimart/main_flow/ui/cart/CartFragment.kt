@@ -78,7 +78,7 @@ class CartFragment : Fragment() {
 
                 val b = Bundle()
 
-                if(user!!.phoneNumber == null){
+                if(user!!.phoneNumber == null || user.phoneNumber!!.isEmpty()){
                     //user is not logged in
                     //send to loginOrRegisterFragment
                     b.putBoolean("fromCart", true)

@@ -33,11 +33,14 @@ class OrdersViewModel(previousOrdersDatabase: PreviousOrderDao) : ViewModel() {
         get() = _notLoggedIn
 
     init {
-        if (user!!.phoneNumber == null){
+        if (user!!.phoneNumber == null || user.phoneNumber!!.isEmpty()){
             //user not logged in
             _notLoggedIn.value = true
         }
         else {
+
+            _notLoggedIn.value = false
+
             databaseRef.child("orders").child(user.phoneNumber!!).addChildEventListener(
                 object  : ChildEventListener {
                     override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {

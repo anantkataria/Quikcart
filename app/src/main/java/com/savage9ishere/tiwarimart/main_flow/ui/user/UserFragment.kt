@@ -59,6 +59,12 @@ class UserFragment : Fragment() {
                     findNavController().navigate(R.id.action_navigation_user_to_aboutFragment)
                 }
             }
+
+            "Profile" -> {
+                if (findNavController().currentDestination?.id == R.id.navigation_user) {
+                    findNavController().navigate(R.id.action_navigation_user_to_profileFragment)
+                }
+            }
         }
     }
 

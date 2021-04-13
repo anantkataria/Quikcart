@@ -30,6 +30,9 @@
         <action
             android:id="@+id/action_navigation_user_to_aboutFragment"
             app:destination="@id/aboutFragment" />
+        <action
+            android:id="@+id/action_navigation_user_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
@@ -58,4 +61,8 @@
         android:id="@+id/particularPreviousOrderFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.orders.previous_orders.particular_previous_order.ParticularPreviousOrderFragment"
         android:label="ParticularPreviousOrderFragment" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.profile.ProfileFragment"
+        android:label="ProfileFragment" />
 </navigation>
