@@ -84,6 +84,7 @@ class CartFragment : Fragment() {
                     b.putBoolean("fromCart", true)
                     b.putBoolean("fromDirect", false)
                     b.putBoolean("fromProfile", false)
+                    b.putBoolean("fromOrders", false)
                     b.putParcelableArrayList("itemsList", it)
                     val intent = Intent(this.activity, AuthActivity::class.java)
                     intent.putExtras(b)

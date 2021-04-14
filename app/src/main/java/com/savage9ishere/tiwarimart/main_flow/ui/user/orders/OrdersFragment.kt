@@ -1,5 +1,6 @@
 package com.savage9ishere.tiwarimart.main_flow.ui.user.orders
 
+import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +11,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.savage9ishere.tiwarimart.R
+import com.savage9ishere.tiwarimart.authentication.AuthActivity
 import com.savage9ishere.tiwarimart.checkout.final_bill.OrderItem
 import com.savage9ishere.tiwarimart.databinding.OrdersFragmentBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
@@ -80,6 +82,19 @@ class OrdersFragment : Fragment() {
                 viewModel.doneNotLoggedIn()
             }
         })
+
+        binding.loginButton.setOnClickListener {
+            val b = Bundle()
+            b.putBoolean("fromOrders", true)
+            b.putBoolean("fromCart", false)
+            b.putBoolean("fromDirect", false)
+            b.putBoolean("fromProfile", false)
+            b.putParcelableArrayList("itemsList", arrayListOf())
+            val intent = Intent(this.activity, AuthActivity::class.java)
+            intent.putExtras(b)
+            findNavController().popBackStack()
+            startActivity(intent)
+        }
 
         return binding.root
     }

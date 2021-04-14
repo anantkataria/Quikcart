@@ -17,6 +17,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.savage9ishere.tiwarimart.R
+import com.savage9ishere.tiwarimart.authentication.AuthActivity
 import com.savage9ishere.tiwarimart.checkout.address.address_database.AddressEntity
 import com.savage9ishere.tiwarimart.databinding.ProfileFragmentBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
@@ -150,6 +151,19 @@ class ProfileFragment : Fragment() {
             if (findNavController().currentDestination?.id == R.id.profileFragment) {
                 findNavController().navigate(R.id.action_profileFragment_to_addNewAddressFragment2)
             }
+        }
+
+        binding.loginButton.setOnClickListener {
+            val b = Bundle()
+            b.putBoolean("fromOrders", false)
+            b.putBoolean("fromCart", false)
+            b.putBoolean("fromDirect", false)
+            b.putBoolean("fromProfile", true)
+            b.putParcelableArrayList("itemsList", arrayListOf())
+            val intent = Intent(this.activity, AuthActivity::class.java)
+            intent.putExtras(b)
+            findNavController().popBackStack()
+            startActivity(intent)
         }
 
         return binding.root

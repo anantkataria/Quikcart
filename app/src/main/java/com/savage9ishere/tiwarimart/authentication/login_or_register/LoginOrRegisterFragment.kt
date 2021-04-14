@@ -40,6 +40,7 @@ class LoginOrRegisterFragment : Fragment() {
     private var fromCart : Boolean? = null
     private var fromDirect : Boolean? = null
     private var fromProfile : Boolean? = null
+    private var fromOrders : Boolean? = null
 
     private lateinit var itemsList : ArrayList<CartItems>
 
@@ -54,6 +55,7 @@ class LoginOrRegisterFragment : Fragment() {
         fromCart = bundle!!.getBoolean("fromCart")
         fromDirect = bundle.getBoolean("fromDirect")
         fromProfile = bundle.getBoolean("fromProfile")
+        fromOrders = bundle.getBoolean("fromOrders")
         itemsList = bundle.getParcelableArrayList("itemsList")!!
 
 
@@ -169,6 +171,7 @@ class LoginOrRegisterFragment : Fragment() {
                         intent.putExtras(b)
                         startActivity(intent)
                     }
+                    Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
                     requireActivity().finish()
                 }
                 else{
