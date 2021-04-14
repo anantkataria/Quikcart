@@ -64,5 +64,20 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.profile.ProfileFragment"
-        android:label="ProfileFragment" />
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_addNewAddressFragment2"
+            app:destination="@id/addNewAddressFragment2" />
+        <action
+            android:id="@+id/action_profileFragment_to_editAddressFragment2"
+            app:destination="@id/editAddressFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewAddressFragment2"
+        android:name="com.savage9ishere.tiwarimart.checkout.address.new_address.AddNewAddressFragment"
+        android:label="AddNewAddressFragment" />
+    <fragment
+        android:id="@+id/editAddressFragment2"
+        android:name="com.savage9ishere.tiwarimart.checkout.address.edit_address.EditAddressFragment"
+        android:label="EditAddressFragment" />
 </navigation>

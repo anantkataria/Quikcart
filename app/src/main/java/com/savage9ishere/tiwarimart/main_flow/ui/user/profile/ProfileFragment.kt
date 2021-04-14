@@ -13,11 +13,14 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.checkout.address.address_database.AddressEntity
 import com.savage9ishere.tiwarimart.databinding.ProfileFragmentBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
+import com.savage9ishere.tiwarimart.main_flow.ui.home.AddressItem
 
 const val REQUEST_IMAGE_GET = 1
 
@@ -25,9 +28,9 @@ class ProfileFragment : Fragment() {
 
     private lateinit var viewModel: ProfileViewModel
 
-    private var imageUri : Uri? = null
+    private var imageUri: Uri? = null
 
-    private lateinit var imageView : ImageView
+    private lateinit var imageView: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,43 +49,37 @@ class ProfileFragment : Fragment() {
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-        val adapter = ProfileAddressAdapter({onDeleteClick(it)}, {onClick(it)})
+        val adapter = ProfileAddressAdapter({ onDeleteClick(it) }, { onClick(it) })
         binding.addressRecyclerView.adapter = adapter
-        binding.addressRecyclerView.layoutManager = LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
+        binding.addressRecyclerView.layoutManager =
+            LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false)
 
         binding.addPhotoButton.setOnClickListener {
             val intent = Intent(Intent.ACTION_GET_CONTENT).apply {
                 type = "image/*"
             }
-            if(intent.resolveActivity(requireActivity().packageManager) != null){
+            if (intent.resolveActivity(requireActivity().packageManager) != null) {
                 startActivityForResult(intent, REQUEST_IMAGE_GET)
             }
         }
 
         binding.saveChangesButton.setOnClickListener {
-            var imgUrl = ""
-            if (imageUri != null){
-                imgUrl = imageUri.toString()
-            }
-
             val name = binding.nameTextInputLayout.editText?.text.toString()
             val phone = binding.phoneTextInputLayout.editText?.text.toString()
             val email = binding.emailTextInputLayout.editText?.text.toString()
 
-            if(name.isEmpty() || phone.isEmpty() || email.isEmpty()){
+            if (name.isEmpty() || phone.isEmpty() || email.isEmpty()) {
                 Toast.makeText(context, "something is empty", Toast.LENGTH_SHORT).show()
-            }
-            else {
-                viewModel.storeUserInDatabase(imgUrl, name, phone, email)
+            } else {
+                viewModel.storeUserInDatabase(name, phone, email)
             }
         }
 
         viewModel.changesSaved.observe(viewLifecycleOwner, {
             it?.let {
-                if (it){
+                if (it) {
                     Toast.makeText(context, "Saved Successfully", Toast.LENGTH_SHORT).show()
-                }
-                else {
+                } else {
                     Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
                 }
                 viewModel.doneSavingChanges()
@@ -97,11 +94,10 @@ class ProfileFragment : Fragment() {
 
         viewModel.notLoggedIn.observe(viewLifecycleOwner, {
             it?.let {
-                if (it){
+                if (it) {
                     binding.loginLayout.visibility = View.VISIBLE
                     binding.mainLayout.visibility = View.GONE
-                }
-                else {
+                } else {
                     binding.loginLayout.visibility = View.GONE
                     binding.mainLayout.visibility = View.VISIBLE
                 }
@@ -111,13 +107,50 @@ class ProfileFragment : Fragment() {
 
         viewModel.photoUrl.observe(viewLifecycleOwner, {
             it?.let {
-                if (it != ""){
+                if (it != "") {
+                    imageUri = it.toUri()
                     Glide.with(binding.profileImage.context)
                         .load(it.toUri().buildUpon().scheme("https").build())
                         .into(binding.profileImage)
+                } else if (it == "") {
+                    binding.profileImage.setImageResource(R.drawable.ic_person)
                 }
             }
         })
+
+        viewModel.photoUrlSaved.observe(viewLifecycleOwner, {
+            it?.let {
+                if (it) {
+                    Toast.makeText(context, "Photo Saved Successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
+                }
+                viewModel.donePhotoUrlSaved()
+            }
+        })
+
+        viewModel.photoUrlDeleted.observe(viewLifecycleOwner, {
+            it?.let {
+                if (it) {
+                    Toast.makeText(context, "Photo Deleted Successfully", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show()
+                }
+                viewModel.donePhotoUrlDeleted()
+            }
+        })
+
+        binding.removePhotoButton.setOnClickListener {
+            imageUri?.let {
+                viewModel.removeImageFromStorage(it)
+            }
+        }
+
+        binding.addAddressButton.setOnClickListener {
+            if (findNavController().currentDestination?.id == R.id.profileFragment) {
+                findNavController().navigate(R.id.action_profileFragment_to_addNewAddressFragment2)
+            }
+        }
 
         return binding.root
     }
@@ -125,19 +158,26 @@ class ProfileFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == REQUEST_IMAGE_GET && resultCode == Activity.RESULT_OK){
-            if (data != null){
-                imageUri = data.data
-                imageView.setImageURI(imageUri)
+        if (requestCode == REQUEST_IMAGE_GET && resultCode == Activity.RESULT_OK) {
+            if (data != null) {
+                viewModel.addPhotoToDatabase(data.data)
             }
         }
     }
 
-    private fun onClick(addressEntity: AddressEntity) {
-        Toast.makeText(context, "still remaining with that", Toast.LENGTH_SHORT).show()
+    private fun onClick(it: AddressEntity) {
+        val b = Bundle()
+        val addressItem = AddressItem(it.fullName, it.mobileNumber, it.pinCode, it.flatHouseNoName, it.areaColonyStreet, it.landmark, it.townCity, it.state, it.deliveryInstructions)
+        val addressId = it.addressId
+        b.putParcelable("addressItem", addressItem)
+        b.putLong("addressId", addressId)
+
+        if (findNavController().currentDestination?.id == R.id.profileFragment) {
+            findNavController().navigate(R.id.action_profileFragment_to_editAddressFragment2, b)
+        }
     }
 
     private fun onDeleteClick(addressEntity: AddressEntity) {
-        Toast.makeText(context, "still remaining with that too", Toast.LENGTH_SHORT).show()
+        viewModel.deleteThisAddress(addressEntity)
     }
 }

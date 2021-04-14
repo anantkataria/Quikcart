@@ -78,8 +78,13 @@ class AddressFragment : Fragment() {
 
         viewModel.onEditThisAddress.observe(viewLifecycleOwner, {
             it?.let {
-                Toast.makeText(context, "edit this address", Toast.LENGTH_SHORT).show()
-                //todo
+                val b = Bundle()
+                val addressItem = AddressItem(it.fullName, it.mobileNumber, it.pinCode, it.flatHouseNoName, it.areaColonyStreet, it.landmark, it.townCity, it.state, it.deliveryInstructions)
+                val addressId = it.addressId
+                b.putParcelable("addressItem", addressItem)
+                b.putLong("addressId", addressId)
+                findNavController().navigate(R.id.action_addressFragment_to_editAddressFragment, b)
+                viewModel.doneOnEditAddress()
             }
         })
 
