@@ -28,7 +28,13 @@ class ParticularCategoryViewModel(categoryName  : String) : ViewModel() {
                 }
 
                 override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                    TODO("Not yet implemented")
+                    val updatedItem = snapshot.getValue(Item::class.java)
+                    for (i in itemsList.indices){
+                        if(itemsList[i]!!.key == updatedItem!!.key){
+                            itemsList.removeAt(i)
+                            itemsList.add(i, updatedItem)
+                        }
+                    }
                 }
 
                 override fun onChildRemoved(snapshot: DataSnapshot) {
