@@ -11,7 +11,7 @@ data class Category(val name: String = "", val uri: String = "", val key : Strin
 data class Item(val name: String = "", var size: String = "", var price: String = "", val discount: String = "", val description: String = "", val deliveryDuration: String = "", val photosUrl: ArrayList<String> = ArrayList(), val key: String? = "", val ratingTotal: Float = 0f, val peopleRatingCount: Long = 0L, var otherSizes: MutableMap<String, String> = mutableMapOf(), val inStock: Boolean = true) : Parcelable
 
 @Parcelize
-data class Review(val user : User, val photosUrl : ArrayList<String> = arrayListOf(), val review : String = "", val title : String = "", val ratingVal : Float = 0F, val useful: Int = 0, val key: String = "") : Parcelable
+data class Review(val user : User = User(), val photosUrl : ArrayList<String> = arrayListOf(), val review : String = "", val title : String = "", val ratingVal : Float = 0F, val useful: Int = 0, val key: String = "") : Parcelable
 
 @Parcelize
 data class CartItems(val name: String = "", val size: String = "", val price: String = "", val priceOriginal: String = "", val qty : Int = 0, val photoUrl: String = "", val key: String? = "", val itemCategory: String = "", val deliveryDuration: String = "") : Parcelable

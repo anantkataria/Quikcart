@@ -4,6 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.google.firebase.database.ChildEventListener
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemDao
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemEntity
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
@@ -14,6 +19,8 @@ import kotlinx.coroutines.launch
 private var quantity = 0
 
 class ParticularItemViewModel(val item: Item, private val database: CartItemDao, private val categoryName: String) : ViewModel() {
+
+    private val databaseRef = Firebase.database.reference
 
     private val _moveAheadToBuy = MutableLiveData<CartItems?>()
     val moveAheadToBuy : LiveData<CartItems?>
@@ -66,6 +73,8 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
     val itemReviews : LiveData<ArrayList<Review>>
         get() = _itemReviews
 
+    val reviewList : ArrayList<Review> = arrayListOf()
+
     private val _doneInserting = MutableLiveData<Boolean?>()
     val doneInserting : LiveData<Boolean?>
         get() = _doneInserting
@@ -94,6 +103,31 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
         }
 
         _itemDescription.value = item.description
+
+        databaseRef.child("reviews").child(categoryName).child(item.key!!).addChildEventListener(object : ChildEventListener{
+            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+                val review = snapshot.getValue(Review::class.java)
+                reviewList.add(review!!)
+                _itemReviews.value = reviewList
+            }
+
+            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildRemoved(snapshot: DataSnapshot) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     private fun setItemNameAndPriceToUi() {

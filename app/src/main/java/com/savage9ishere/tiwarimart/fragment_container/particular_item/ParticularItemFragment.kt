@@ -53,6 +53,16 @@ class ParticularItemFragment : Fragment() {
         binding.itemPhotosRecyclerView.adapter = itemPhotosAdapter
         binding.itemPhotosRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false)
 
+        val reviewsAdapter = ReviewsAdapter(requireActivity())
+        binding.customerReviewsRecyclerView.adapter = reviewsAdapter
+        binding.customerReviewsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+        viewModel.itemReviews.observe(viewLifecycleOwner, {
+            it?.let {
+                reviewsAdapter.submitList(it.toList())
+            }
+        })
+
         binding.writeReviewButton.setOnClickListener {
             val b = Bundle()
             b.putParcelable("item", item)
