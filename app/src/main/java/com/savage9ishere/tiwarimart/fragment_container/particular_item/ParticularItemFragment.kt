@@ -42,8 +42,9 @@ class ParticularItemFragment : Fragment() {
 
         val application = requireNotNull(this.activity).application
         val cartDataSource = CartItemsDatabase.getInstance(application).cartItemDao
+        val favoriteDataSource = CartItemsDatabase.getInstance(application).favoritesDao
 
-        val viewModelFactory = ParticularItemViewModelFactory(item!!, cartDataSource, categoryName!!)
+        val viewModelFactory = ParticularItemViewModelFactory(item!!, cartDataSource, categoryName!!, favoriteDataSource)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ParticularItemViewModel::class.java)
 
         binding.viewModel = viewModel
@@ -56,12 +57,6 @@ class ParticularItemFragment : Fragment() {
         val reviewsAdapter = ReviewsAdapter(requireActivity())
         binding.customerReviewsRecyclerView.adapter = reviewsAdapter
         binding.customerReviewsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-
-        viewModel.itemReviews.observe(viewLifecycleOwner, {
-            it?.let {
-                reviewsAdapter.submitList(it.toList())
-            }
-        })
 
         binding.writeReviewButton.setOnClickListener {
             val b = Bundle()
@@ -76,6 +71,10 @@ class ParticularItemFragment : Fragment() {
 
         binding.addToCartButton.setOnClickListener {
             viewModel.addToCart()
+        }
+
+        binding.favoriteImage.setOnClickListener {
+            viewModel.handleFavoriteClick()
         }
 
         val sizes = item.otherSizes.keys.toList()
@@ -167,6 +166,23 @@ class ParticularItemFragment : Fragment() {
         viewModel.itemImages.observe(viewLifecycleOwner, {
             it?.let {
                 itemPhotosAdapter.submitList(it.toList())
+            }
+        })
+
+        viewModel.itemReviews.observe(viewLifecycleOwner, {
+            it?.let {
+                reviewsAdapter.submitList(it.toList())
+            }
+        })
+
+        viewModel.itemCountInFavorite.observe(viewLifecycleOwner, {
+            it?.let {
+                if (it == 0){
+                    binding.favoriteImage.setImageResource(R.drawable.ic_favorite_border)
+                }
+                else if (it == 1){
+                    binding.favoriteImage.setImageResource(R.drawable.ic_favorites)
+                }
             }
         })
 

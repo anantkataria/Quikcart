@@ -1,5 +1,6 @@
 package com.savage9ishere.tiwarimart.fragment_container.particular_item
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -14,13 +15,22 @@ import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartIt
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Item
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Review
+import com.savage9ishere.tiwarimart.main_flow.ui.user.favorites.favorites_database.FavoritesDao
+import com.savage9ishere.tiwarimart.main_flow.ui.user.favorites.favorites_database.FavoritesEntity
 import kotlinx.coroutines.launch
 
 private var quantity = 0
 
-class ParticularItemViewModel(val item: Item, private val database: CartItemDao, private val categoryName: String) : ViewModel() {
+class ParticularItemViewModel(
+    val item: Item,
+    private val database: CartItemDao,
+    private val categoryName: String,
+    private val favoriteDataSource: FavoritesDao
+) : ViewModel() {
 
     private val databaseRef = Firebase.database.reference
+
+    val itemCountInFavorite = favoriteDataSource.countInstance(item.key!!)
 
     private val _moveAheadToBuy = MutableLiveData<CartItems?>()
     val moveAheadToBuy : LiveData<CartItems?>
@@ -194,5 +204,19 @@ class ParticularItemViewModel(val item: Item, private val database: CartItemDao,
 
     fun doneMovingAhead() {
         _moveAheadToBuy.value = null
+    }
+
+    fun handleFavoriteClick() {
+        if (itemCountInFavorite.value == 0){
+            val favoriteItem = FavoritesEntity(categoryName = categoryName, itemName = item.name, size = item.size, price = item.price, discount = item.discount, deliveryDuration = item.deliveryDuration, photoUrl = item.photosUrl[0], databaseKey = item.key, ratingTotal = item.ratingTotal, peopleRatingCount = item.peopleRatingCount, inStock = item.inStock)
+            viewModelScope.launch {
+                favoriteDataSource.insert(favoriteItem)
+            }
+        }
+        else if (itemCountInFavorite.value == 1) {
+            viewModelScope.launch {
+                favoriteDataSource.deleteFromDatabase(item.key!!)
+            }
+        }
     }
 }
