@@ -55,8 +55,13 @@ class ReviewViewModel(val item: Item, val categoryName: String) : ViewModel() {
 
         //add one to peopleRatingcount
         //and add this rating to total rating in the current item
+        if (itemPhotosList.isNotEmpty()){
+            uploadImages(ArrayList(), itemPhotosList, review, title, rating, categoryName)
+        }
+        else {
+            uploadToDatabase(arrayListOf(), review, title, rating, categoryName)
+        }
 
-        uploadImages(ArrayList(), itemPhotosList, review, title, rating, categoryName)
 
     }
 

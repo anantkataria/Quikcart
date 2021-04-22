@@ -3,11 +3,10 @@ package com.savage9ishere.tiwarimart.fragment_container.particular_category
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -21,6 +20,12 @@ class ParticularCategoryFragment : Fragment() {
     private var categoryImageUri: String? = null
     private var categoryKey: String? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
 
@@ -30,6 +35,8 @@ class ParticularCategoryFragment : Fragment() {
         categoryName = bundle!!.getString("name")
         categoryImageUri  = bundle.getString("uri")
         categoryKey = bundle.getString("key")
+
+        (activity as AppCompatActivity).supportActionBar?.title = categoryName
 
         val viewModelFactory = ParticularCategoryViewModelFactory(categoryName!!)
         viewModel = ViewModelProvider(this, viewModelFactory).get(ParticularCategoryViewModel::class.java)
@@ -55,4 +62,19 @@ class ParticularCategoryFragment : Fragment() {
         findNavController().navigate(R.id.action_particularCategoryFragment_to_particularItemFragment, b)
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_container_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.cart ->{
+                findNavController().navigate(R.id.action_particularCategoryFragment_to_cartFragment)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
 }

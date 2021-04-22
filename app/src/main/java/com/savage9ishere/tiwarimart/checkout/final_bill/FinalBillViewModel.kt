@@ -105,8 +105,8 @@ class FinalBillViewModel(
         var billAmountTotal = 0
         var billTotalOriginal = 0
         for (item in listItems){
-            billAmountTotal += item.price.toInt()
-            billTotalOriginal += item.priceOriginal.toInt()
+            billAmountTotal += item.price.toInt()*item.qty
+            billTotalOriginal += item.priceOriginal.toInt()*item.qty
         }
 
         _billAmountTotal.value = billAmountTotal.toString()

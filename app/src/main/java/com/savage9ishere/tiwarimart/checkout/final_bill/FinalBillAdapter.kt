@@ -17,6 +17,7 @@ class FinalBillAdapter(): ListAdapter<CartItems, FinalBillAdapter.ViewHolder>(Fi
         private val itemImage : ImageView = binding.productImageView
         private val itemName : TextView = binding.productNameTextView
         private val itemPrice : TextView = binding.priceTextView
+        private val itemQty : TextView = binding.qtyTextView
         private val itemOriginalPrice : TextView = binding.originalPriceTextView
         private val saveAmountText : TextView = binding.saveAmountTextView
         private val deliveryTimeApproxText : TextView = binding.deliveryTimeApproximateTextView
@@ -36,6 +37,9 @@ class FinalBillAdapter(): ListAdapter<CartItems, FinalBillAdapter.ViewHolder>(Fi
 
             val originalPrice = "₹" + item.priceOriginal
             itemOriginalPrice.text = originalPrice
+
+            val qty = "QTY : ${item.qty}"
+            itemQty.text = qty
 
             val saved = item.priceOriginal.toInt() - item.price.toInt()
 

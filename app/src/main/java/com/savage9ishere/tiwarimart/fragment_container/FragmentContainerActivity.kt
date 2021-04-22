@@ -2,32 +2,34 @@ package com.savage9ishere.tiwarimart.fragment_container
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
 import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.fragment_container.particular_category.ParticularCategoryFragment
 
 class FragmentContainerActivity : AppCompatActivity() {
 
-//    private var name : String? = null
-//    private var uri : String? = null
-//    private var key : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_fragment_container)
 
-//        name = intent.getStringExtra("name")
-//        uri = intent.getStringExtra("uri")
-//        key = intent.getStringExtra("key")
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+    }
 
-//        val b = Bundle()
-//        b.putString("name", name)
-//        b.putString("key", key)
-//        b.putString("uri", uri)
-
-        //val fragment = ParticularCategoryFragment()
-        //fragment.requireArguments().putBundle("bundle", b)
-
-
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed();
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
     }
 
 }

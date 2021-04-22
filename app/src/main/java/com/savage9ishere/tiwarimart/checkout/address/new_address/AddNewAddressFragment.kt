@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.get
 import androidx.navigation.fragment.findNavController
 import com.savage9ishere.tiwarimart.R
@@ -27,6 +28,8 @@ class AddNewAddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = AddNewAddressFragmentBinding.inflate(inflater)
+
+        (activity as AppCompatActivity).supportActionBar?.title = "New Address"
 
         val application = requireActivity().application
         val addressDataSource = CartItemsDatabase.getInstance(application).addressDao

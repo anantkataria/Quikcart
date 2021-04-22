@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.checkout.address.address_database.AddressEntity
@@ -26,6 +27,8 @@ class EditAddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = EditAddressFragmentBinding.inflate(inflater)
+
+        (activity as AppCompatActivity).supportActionBar?.title = "Edit Address"
 
         val address: AddressItem? = requireArguments().getParcelable("addressItem")
         val addressId: Long = requireArguments().getLong("addressId")

@@ -241,30 +241,7 @@
 
             </RelativeLayout>
 
-            <RelativeLayout
-                android:id="@+id/delivery_address_relative_layout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/secure_transaction_relative_layout"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp">
 
-                <ImageView
-                    android:id="@+id/address_image"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_address" />
-
-                <TextView
-                    android:id="@+id/delivery_address_text_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginStart="8dp"
-                    android:layout_toEndOf="@+id/address_image"
-                    android:text="Deliver at Shilalekh, Alkapuri" />
-
-            </RelativeLayout>
 
             <TextView
                 android:text="@{viewModel.itemDescription}"
@@ -284,7 +261,7 @@ Pretium quam vulputate dignissim suspendisse in est. Diam donec adipiscing trist
                 android:id="@+id/customer_review_relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/delivery_address_relative_layout"
+                android:layout_below="@+id/secure_transaction_relative_layout"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp">
 
@@ -324,13 +301,13 @@ Pretium quam vulputate dignissim suspendisse in est. Diam donec adipiscing trist
                 android:text="Write a Review"
                 style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/write_review_button"
-                android:layout_below="@id/customer_review_relative_layout"
+                android:layout_below="@id/customer_reviews_recycler_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"/>
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/customer_reviews_recycler_view"
-                android:layout_below="@+id/write_review_button"
+                android:layout_below="@+id/customer_review_relative_layout"
                 android:layout_margin="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

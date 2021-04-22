@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.savage9ishere.tiwarimart.databinding.FinalBillFragmentBinding
@@ -24,6 +25,8 @@ class FinalBillFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = FinalBillFragmentBinding.inflate(inflater)
+
+        (activity as AppCompatActivity).supportActionBar?.title = "Checkout"
 
 
         val itemsList : ArrayList<CartItems>? = requireArguments().getParcelableArrayList("itemsList")

@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_particularCategoryFragment_to_particularItemFragment"
             app:destination="@id/particularItemFragment" />
+        <action
+            android:id="@+id/action_particularCategoryFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/particularItemFragment"
@@ -22,10 +25,17 @@
         <action
             android:id="@+id/action_particularItemFragment_to_reviewFragment"
             app:destination="@id/reviewFragment" />
+        <action
+            android:id="@+id/action_particularItemFragment_to_cartFragment"
+            app:destination="@id/cartFragment" />
     </fragment>
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.review.ReviewFragment"
         android:label="review_fragment"
         tools:layout="@layout/review_fragment" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.cart.CartFragment"
+        android:label="CartFragment" />
 </navigation>

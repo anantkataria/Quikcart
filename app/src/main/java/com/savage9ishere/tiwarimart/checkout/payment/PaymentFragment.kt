@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.databinding.PaymentFragmentBinding
@@ -22,6 +23,8 @@ class PaymentFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = PaymentFragmentBinding.inflate(inflater)
+
+        (activity as AppCompatActivity).supportActionBar?.title = "Payment"
 
         val itemsList : ArrayList<CartItems>? = requireArguments().getParcelableArrayList("itemsList")
         val address : AddressItem? = requireArguments().getParcelable("address")

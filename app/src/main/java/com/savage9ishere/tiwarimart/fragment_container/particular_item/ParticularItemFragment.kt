@@ -3,13 +3,12 @@ package com.savage9ishere.tiwarimart.fragment_container.particular_item
 import android.content.Intent
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
@@ -30,6 +29,12 @@ class ParticularItemFragment : Fragment() {
 
     private lateinit var viewModel: ParticularItemViewModel
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +44,8 @@ class ParticularItemFragment : Fragment() {
 
         val item : Item? = requireArguments().getParcelable("item")
         val categoryName : String? = requireArguments().getString("category_name")
+
+        (activity as AppCompatActivity).supportActionBar?.title = item!!.name
 
         val application = requireNotNull(this.activity).application
         val cartDataSource = CartItemsDatabase.getInstance(application).cartItemDao
@@ -188,4 +195,21 @@ class ParticularItemFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.fragment_container_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.cart ->{
+                findNavController().navigate(R.id.action_particularItemFragment_to_cartFragment)
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
+        }
+    }
+
 }

@@ -70,9 +70,16 @@
             </RelativeLayout>
 
             <TextView
+                tools:text = "QTY : 7"
+                android:id="@+id/qty_text_view"
+                android:layout_below="@+id/placeholder_relative_layout2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
                 android:id="@+id/save_amount_text_view"
                 tools:text="Save ₹55 (15%)"
-                android:layout_below="@+id/placeholder_relative_layout2"
+                android:layout_below="@+id/qty_text_view"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 

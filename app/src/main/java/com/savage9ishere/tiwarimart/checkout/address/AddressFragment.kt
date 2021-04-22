@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.savage9ishere.tiwarimart.R
@@ -25,6 +26,8 @@ class AddressFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val binding = AddressFragmentBinding.inflate(inflater)
+
+        (activity as AppCompatActivity).supportActionBar?.title = "Address"
 
         val bundle = requireActivity().intent.extras
         val itemsList : ArrayList<CartItems> = bundle!!.getParcelableArrayList("itemsList")!!

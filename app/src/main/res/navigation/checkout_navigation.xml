@@ -8,8 +8,8 @@
     <fragment
         android:id="@+id/addressFragment"
         android:name="com.savage9ishere.tiwarimart.checkout.address.AddressFragment"
-        android:label="address_fragment"
-        tools:layout="@layout/address_fragment" >
+        android:label="Address"
+        tools:layout="@layout/address_fragment">
         <action
             android:id="@+id/action_addressFragment_to_paymentFragment"
             app:destination="@id/paymentFragment" />
@@ -23,8 +23,8 @@
     <fragment
         android:id="@+id/paymentFragment"
         android:name="com.savage9ishere.tiwarimart.checkout.payment.PaymentFragment"
-        android:label="payment_fragment"
-        tools:layout="@layout/payment_fragment" >
+        android:label="Payment"
+        tools:layout="@layout/payment_fragment">
         <action
             android:id="@+id/action_paymentFragment_to_finalBillFragment"
             app:destination="@id/finalBillFragment" />
@@ -32,14 +32,14 @@
     <fragment
         android:id="@+id/addNewAddressFragment"
         android:name="com.savage9ishere.tiwarimart.checkout.address.new_address.AddNewAddressFragment"
-        android:label="add_new_address_fragment"
+        android:label="New Address"
         tools:layout="@layout/add_new_address_fragment" />
     <fragment
         android:id="@+id/finalBillFragment"
         android:name="com.savage9ishere.tiwarimart.checkout.final_bill.FinalBillFragment"
-        android:label="FinalBillFragment" />
+        android:label="Checkout" />
     <fragment
         android:id="@+id/editAddressFragment"
         android:name="com.savage9ishere.tiwarimart.checkout.address.edit_address.EditAddressFragment"
-        android:label="EditAddressFragment" />
+        android:label="Edit Address" />
 </navigation>

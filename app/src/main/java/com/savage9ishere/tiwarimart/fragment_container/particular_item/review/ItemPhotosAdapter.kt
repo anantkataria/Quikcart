@@ -17,7 +17,7 @@ class ItemPhotosAdapter(private val onLongClick: (position: Int) -> Unit) : List
         return ViewHolder.from(parent, onLongClick)
     }
 
-    override fun onBindViewHolder(holder: ItemPhotosAdapter.ViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
     }
