@@ -80,26 +80,31 @@ class SampleActivity : AppCompatActivity() {
         val menuInflater = menuInflater
         menuInflater.inflate(R.menu.menu2, menu)
 
-        Log.e("hihihi", "this is running")
-        val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
-        searchView = menu!!.findItem(R.id.search).actionView as SearchView
-        searchView.queryHint = "Search Products, Categories here..."
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
-        searchView.setIconifiedByDefault(false)
 
-        val editText : EditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text)
-        editText.setHintTextColor(ContextCompat.getColor(this, R.color.grey3))
-        editText.setTextColor(ContextCompat.getColor(this, R.color.dark_grey))
+        if (menu != null) {
+            Log.e("hihihi", "menu is not null")
+            val searchManager = getSystemService(Context.SEARCH_SERVICE) as SearchManager
+            searchView = menu.findItem(R.id.search).actionView as SearchView
+            searchView.queryHint = "Search Products, Categories here..."
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(componentName))
+            searchView.setIconifiedByDefault(false)
 
-        val searchCloseIcon : ImageView = searchView.findViewById(androidx.appcompat.R.id.search_close_btn)
-        searchCloseIcon.setImageResource(R.drawable.ic_clear)
+            val editText : EditText = searchView.findViewById(androidx.appcompat.R.id.search_src_text)
+            editText.setHintTextColor(ContextCompat.getColor(this, R.color.grey3))
+            editText.setTextColor(ContextCompat.getColor(this, R.color.dark_grey))
 
-        val searchIcon : ImageView = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon)
-        searchIcon.setImageResource(R.drawable.ic_search)
+            val searchCloseIcon : ImageView = searchView.findViewById(androidx.appcompat.R.id.search_close_btn)
+            searchCloseIcon.setImageResource(R.drawable.ic_clear)
 
-        searchView.maxWidth = Integer.MAX_VALUE
+            val searchIcon : ImageView = searchView.findViewById(androidx.appcompat.R.id.search_mag_icon)
+            searchIcon.setImageResource(R.drawable.ic_search)
 
-        observableFunction()
+            searchView.maxWidth = Integer.MAX_VALUE
+
+            observableFunction()
+        }
+
+
 
         return true
     }

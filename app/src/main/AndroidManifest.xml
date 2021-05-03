@@ -14,10 +14,6 @@
         <activity android:name=".search.sample.SampleActivity"
             android:theme="@style/Theme.MysearchDialog"></activity>
         <activity android:name=".search.search_result.SearchResultActivity" />
-        <activity
-            android:name=".search.search_dialog.SearchDialogActivity"
-            android:label="Search Product"
-            android:theme="@style/Theme.MysearchDialog"></activity>
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".checkout.CheckoutActivity" />
         <activity android:name=".authentication.AuthActivity" />

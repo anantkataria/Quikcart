@@ -16,10 +16,10 @@ import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
 import com.savage9ishere.tiwarimart.search.SearchViewModel
 import com.savage9ishere.tiwarimart.search.SearchViewModelFactory
+import com.savage9ishere.tiwarimart.search.sample.SampleActivity
 import com.savage9ishere.tiwarimart.search.search_database.CategoryDao
 import com.savage9ishere.tiwarimart.search.search_database.CategoryWiseDao
 import com.savage9ishere.tiwarimart.search.search_database.CategoryWiseEntity
-import com.savage9ishere.tiwarimart.search.search_dialog.SearchDialogActivity
 
 class SearchResultActivity : AppCompatActivity() {
 
@@ -99,10 +99,10 @@ class SearchResultActivity : AppCompatActivity() {
         emptyView = findViewById(R.id.empty_view)
 
         searchBox.setOnClickListener {
-            val intent = Intent(this, SearchDialogActivity::class.java)
-            intent.action = Intent.ACTION_GET_CONTENT
-            intent.putExtra("query", searchBar.text)
-            startActivity(intent)
+            val intentt = Intent(this, SampleActivity::class.java)
+            intentt.action = Intent.ACTION_GET_CONTENT
+            intentt.putExtra("query", searchBar.text)
+            startActivity(intentt)
             finish()
         }
 
