@@ -1,14 +1,16 @@
-package com.savage9ishere.tiwarimart.fragment_container.particular_item
+package com.savage9ishere.tiwarimart.main_flow.ui.user.favorites.on_favorite_click
 
 import android.content.Intent
-import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.view.*
 import androidx.fragment.app.Fragment
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
@@ -16,39 +18,36 @@ import com.google.firebase.ktx.Firebase
 import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.authentication.AuthActivity
 import com.savage9ishere.tiwarimart.checkout.CheckoutActivity
-import com.savage9ishere.tiwarimart.databinding.ParticularItemFragmentBinding
+import com.savage9ishere.tiwarimart.databinding.LoadItemDataFragmentBinding
+import com.savage9ishere.tiwarimart.fragment_container.particular_item.ItemPhotosAdapter
+import com.savage9ishere.tiwarimart.fragment_container.particular_item.ReviewsAdapter
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Item
 
-class ParticularItemFragment : Fragment() {
+class LoadItemDataFragment : Fragment() {
 
-    private lateinit var viewModel: ParticularItemViewModel
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        setHasOptionsMenu(true)
-    }
+    private lateinit var viewModel: LoadItemDataViewModel
+    private lateinit var item : Item
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        val binding = LoadItemDataFragmentBinding.inflate(inflater)
 
-        val binding = ParticularItemFragmentBinding.inflate(inflater)
+        val key = requireArguments().getString("key")
+        val categoryName = requireArguments().getString("categoryName")
+        val itemName = requireArguments().getString("itemName")
 
-        val item : Item? = requireArguments().getParcelable("item")
-        val categoryName : String? = requireArguments().getString("category_name")
-
-        (activity as AppCompatActivity).supportActionBar?.title = item!!.name
+        (activity as AppCompatActivity).supportActionBar?.title = itemName
 
         val application = requireNotNull(this.activity).application
         val cartDataSource = CartItemsDatabase.getInstance(application).cartItemDao
         val favoriteDataSource = CartItemsDatabase.getInstance(application).favoritesDao
 
-        val viewModelFactory = ParticularItemViewModelFactory(item, cartDataSource, categoryName!!, favoriteDataSource)
-        viewModel = ViewModelProvider(this, viewModelFactory).get(ParticularItemViewModel::class.java)
+        val viewModelFactory = LoadItemDataViewModelFactory(categoryName!!, key!!, cartDataSource, favoriteDataSource)
+        viewModel = ViewModelProvider(this, viewModelFactory).get(LoadItemDataViewModel::class.java)
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -65,8 +64,14 @@ class ParticularItemFragment : Fragment() {
             val b = Bundle()
             b.putParcelable("item", item)
             b.putString("category_name", categoryName)
-            findNavController().navigate(R.id.action_particularItemFragment_to_reviewFragment, b)
+            findNavController().navigate(R.id.action_loadItemDataFragment_to_reviewFragment2, b)
         }
+
+        viewModel.thisItemPublic.observe(viewLifecycleOwner, {
+            it?.let {
+                item = it
+            }
+        })
 
         binding.buyNowButton.setOnClickListener {
             viewModel.moveAheadToBuyItem()
@@ -80,28 +85,34 @@ class ParticularItemFragment : Fragment() {
             viewModel.handleFavoriteClick()
         }
 
-        val sizes = item.otherSizes.keys.toList()
-        val sizeSpinner = binding.sizeSpinner
-        val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, sizes)
-        sizeSpinner.adapter = adapter
-        sizeSpinner.setSelection(0)
+        viewModel.otherSizes.observe(viewLifecycleOwner, {
+            it?.let {
+                val sizes = it
+                val sizeSpinner = binding.sizeSpinner
+                val adapter = ArrayAdapter(requireContext(), R.layout.spinner_item, sizes)
+                sizeSpinner.adapter = adapter
+                sizeSpinner.setSelection(0)
 
-        sizeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(
-                parent: AdapterView<*>?,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                val size = parent?.getItemAtPosition(position).toString()
-                viewModel.setNewSize(size)
+                sizeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+                    override fun onItemSelected(
+                        parent: AdapterView<*>?,
+                        view: View?,
+                        position: Int,
+                        id: Long
+                    ) {
+                        val size = parent?.getItemAtPosition(position).toString()
+                        viewModel.setNewSize(size)
+                    }
+
+                    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+                    }
+
+                }
             }
+        })
 
-            override fun onNothingSelected(parent: AdapterView<*>?) {
 
-            }
-
-        }
 
         val qtySpinner = binding.qtySpinner
         val list = listOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20)
@@ -191,21 +202,4 @@ class ParticularItemFragment : Fragment() {
 
         return binding.root
     }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.fragment_container_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.cart ->{
-                findNavController().navigate(R.id.action_particularItemFragment_to_cartFragment)
-                true
-            }
-            else -> {
-                super.onOptionsItemSelected(item)
-            }
-        }
-    }
-
 }

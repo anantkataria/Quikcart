@@ -14,8 +14,12 @@ import com.savage9ishere.tiwarimart.main_flow.ui.user.favorites.favorites_databa
 import com.savage9ishere.tiwarimart.main_flow.ui.user.orders.previous_orders.ArrayListConverter
 import com.savage9ishere.tiwarimart.main_flow.ui.user.orders.previous_orders.PreviousOrderDao
 import com.savage9ishere.tiwarimart.main_flow.ui.user.orders.previous_orders.PreviousOrderEntity
+import com.savage9ishere.tiwarimart.search.search_database.CategoryDao
+import com.savage9ishere.tiwarimart.search.search_database.CategoryEntity
+import com.savage9ishere.tiwarimart.search.search_database.CategoryWiseDao
+import com.savage9ishere.tiwarimart.search.search_database.CategoryWiseEntity
 
-@Database(entities = [CartItemEntity::class, SaveForLaterEntity::class, AddressEntity::class, PreviousOrderEntity::class, FavoritesEntity::class], version = 1, exportSchema = false)
+@Database(entities = [CartItemEntity::class, SaveForLaterEntity::class, AddressEntity::class, PreviousOrderEntity::class, FavoritesEntity::class, CategoryEntity::class, CategoryWiseEntity::class], version = 1, exportSchema = false)
 @TypeConverters(ArrayListConverter::class)
 abstract class CartItemsDatabase: RoomDatabase() {
 
@@ -24,6 +28,8 @@ abstract class CartItemsDatabase: RoomDatabase() {
     abstract val addressDao : AddressDao
     abstract val previousOrderDao : PreviousOrderDao
     abstract val favoritesDao : FavoritesDao
+    abstract val categoryDao : CategoryDao
+    abstract val categoryWiseDao : CategoryWiseDao
 
     companion object {
 

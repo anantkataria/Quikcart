@@ -65,29 +65,36 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.4'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.3.4'
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
 
     //recyclerview
-    implementation "androidx.recyclerview:recyclerview:1.1.0"
+    implementation "androidx.recyclerview:recyclerview:1.2.0"
 
     //todo firebaseUI (get usage for all functionalities (currently only for firebase storage))
     implementation 'com.firebaseui:firebase-ui-storage:6.4.0'
 
     // Find the latest Glide releases here: https://goo.gl/LpksbR
-    implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 // If you're using Kotlin (and therefore, kapt), use kapt instead of annotationProcessor
-    kapt 'com.github.bumptech.glide:compiler:4.11.0'
+    kapt 'com.github.bumptech.glide:compiler:4.12.0'
 
     apply plugin: "androidx.navigation.safeargs.kotlin"
 
     implementation "android.arch.lifecycle:extensions:1.1.1"
 
-    implementation "androidx.room:room-runtime:2.2.6"
-    kapt "androidx.room:room-compiler:2.2.6"
+    implementation "androidx.room:room-runtime:2.3.0"
+    kapt "androidx.room:room-compiler:2.3.0"
 
     // Kotlin Extensions and Coroutines support for Room
-    implementation "androidx.room:room-ktx:2.2.6"
+    implementation "androidx.room:room-ktx:2.3.0"
 
     implementation 'com.google.code.gson:gson:2.8.6'
+
+//    implementation 'com.shreyaspatil:EasyUpiPayment:2.0'
+    implementation 'dev.shreyaspatil.EasyUpiPayment:EasyUpiPayment:3.0.2'
+
+    implementation "androidx.room:room-rxjava2:2.3.0"
+    implementation "androidx.room:room-guava:2.3.0"
+
 }

@@ -40,11 +40,11 @@ class PaymentFragment : Fragment() {
         }
 
         binding.upiButton.setOnClickListener {
-//            val b = Bundle()
-//            b.putParcelableArrayList("itemsList", itemsList)
-//            b.putParcelable("address", address)
-//            b.putString("paymentMethod", "upi")
-//            findNavController().navigate(R.id.action_paymentFragment_to_finalBillFragment, b)
+            val b = Bundle()
+            b.putParcelableArrayList("itemsList", itemsList)
+            b.putParcelable("address", address)
+            b.putString("paymentMethod", "upi")
+            findNavController().navigate(R.id.action_paymentFragment_to_finalBillFragment, b)
         }
 
         return binding.root

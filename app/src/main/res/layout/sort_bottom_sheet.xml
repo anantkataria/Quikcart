@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bottom_sheet"
+    android:background="@drawable/bottom_sheet_background">
+
+
+    <TextView
+        android:id="@+id/sort_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:textAllCaps="true"
+        android:text="Sort By"
+        android:textSize="16sp" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightgrey" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
+        >
+
+        <RadioButton
+            android:id="@+id/relevance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:checked="true"
+            android:padding="15dp"
+            android:text="Relevance"
+            android:textFontWeight="@android:integer/config_longAnimTime"
+            android:textSize="16sp"
+            />
+
+
+        <RadioButton
+            android:id="@+id/price_low"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp"
+            android:text="Price -- Low to high"
+            android:textFontWeight="@android:integer/config_longAnimTime"
+            android:textSize="16sp"
+            />
+
+        <RadioButton
+            android:id="@+id/price_high"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp"
+            android:text="Price -- High to Low"
+            android:textFontWeight="@android:integer/config_longAnimTime"
+            android:textSize="16sp"
+            />
+
+        <RadioButton
+            android:id="@+id/popularity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:padding="15dp"
+            android:text="Popularity"
+            android:textFontWeight="@android:integer/config_longAnimTime"
+            android:textSize="16sp"
+            />
+
+    </RadioGroup>
+
+</LinearLayout>

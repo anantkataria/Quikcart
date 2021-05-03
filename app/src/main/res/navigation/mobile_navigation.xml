@@ -86,5 +86,21 @@
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.favorites.FavoritesFragment"
-        android:label="Favorites" />
+        android:label="Favorites" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_loadItemDataFragment"
+            app:destination="@id/loadItemDataFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loadItemDataFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.favorites.on_favorite_click.LoadItemDataFragment"
+        android:label="LoadItemDataFragment" >
+        <action
+            android:id="@+id/action_loadItemDataFragment_to_reviewFragment2"
+            app:destination="@id/reviewFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/reviewFragment2"
+        android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.review.ReviewFragment"
+        android:label="ReviewFragment" />
 </navigation>

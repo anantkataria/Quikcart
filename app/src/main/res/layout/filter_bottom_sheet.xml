@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/bottom_filter_sheet_main"
+    android:background="@drawable/bottom_sheet_background">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        >
+        <TextView
+            android:id="@+id/sort_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textAllCaps="true"
+            android:layout_weight="1"
+            android:text="Filters By "
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/clear_filters"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:textColor="@color/black"
+            android:text="Clear Filters"
+            android:textAllCaps="false"
+            android:textSize="16sp" />
+
+
+    </LinearLayout>
+
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/lightest_grey" />
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/lightest_grey"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/price_filter"
+                    style="@style/filterStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:text="Price" />
+
+                <TextView
+                    android:id="@+id/discount_filter"
+                    style="@style/filterStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Discount" />
+
+                <TextView
+                    android:id="@+id/rating_filter"
+                    style="@style/filterStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Customer Ratings" />
+
+                <TextView
+                    android:id="@+id/avaliability_filter"
+                    style="@style/filterStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Availability" />
+
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <!--Price Filter-->
+
+                <LinearLayout
+                    android:id="@+id/price_filter_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:id="@+id/below_250"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. 250 and Below" />
+
+                    <CheckBox
+                        android:id="@+id/between_251_500"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. 251 - Rs. 500" />
+
+
+                    <CheckBox
+                        android:id="@+id/between_501_1000"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. 501 - Rs. 1000" />
+
+
+                    <CheckBox
+                        android:id="@+id/between_1001_2000"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. 1001 - Rs. 2000" />
+
+                    <CheckBox
+                        android:id="@+id/between_2001_5000"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. 2001 - Rs. 5000" />
+
+                    <CheckBox
+                        android:id="@+id/between_5001_10000"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. 5001 - Rs. 10000" />
+
+                    <CheckBox
+                        android:id="@+id/above_10001"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Rs. 10001 and above " />
+
+
+                </LinearLayout>
+
+
+                <!--Discount Filter-->
+                <LinearLayout
+                    android:id="@+id/discount_filter_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <CheckBox
+                        android:id="@+id/more_than_70"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="70% or more" />
+
+                    <CheckBox
+                        android:id="@+id/more_than_60"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="60% or more" />
+
+
+                    <CheckBox
+                        android:id="@+id/more_than_50"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="50% or more" />
+
+
+                    <CheckBox
+                        android:id="@+id/more_than_40"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="40% or more" />
+
+                    <CheckBox
+                        android:id="@+id/more_than_30"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="30% or more" />
+
+                    <CheckBox
+                        android:id="@+id/below_30"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="30% and below" />
+
+                </LinearLayout>
+
+
+                <!--Customer Ratings-->
+
+                <LinearLayout
+                    android:id="@+id/customer_filter_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <CheckBox
+                        android:id="@+id/more_than_4"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="4* and above" />
+
+                    <CheckBox
+                        android:id="@+id/more_than_3"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="3* and above" />
+
+
+                    <CheckBox
+                        android:id="@+id/more_than_2"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="2* and above" />
+
+
+                    <CheckBox
+                        android:id="@+id/more_than_1"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1* and above" />
+
+                </LinearLayout>
+
+                <!--Stock Filter-->
+
+                <LinearLayout
+                    android:id="@+id/outof_stock_filter_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+
+                    <CheckBox
+                        android:id="@+id/exclude_out_of_stock"
+                        style="@style/checkboxstyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Exclude Out of Stock" />
+                </LinearLayout>
+
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/apply_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginRight="10dp"
+                android:background="#FB8C00"
+                android:text="Apply"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:backgroundTint="#FB8C00"
+                app:cornerRadius="0dp" />
+        </RelativeLayout>
+
+
+
+
+    </LinearLayout>
+
+
+
+
+</LinearLayout>

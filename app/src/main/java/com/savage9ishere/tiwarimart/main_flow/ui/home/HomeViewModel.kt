@@ -14,7 +14,6 @@ import com.google.firebase.storage.ktx.storage
 class HomeViewModel : ViewModel() {
 
     private val databaseRef = Firebase.database.reference
-    private val storgaeRef = Firebase.storage.reference
 
     private val _categories = MutableLiveData<List<Category?>>()
     val categories:LiveData<List<Category?>>

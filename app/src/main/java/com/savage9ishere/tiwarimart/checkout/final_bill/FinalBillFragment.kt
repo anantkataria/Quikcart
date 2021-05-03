@@ -1,7 +1,10 @@
 package com.savage9ishere.tiwarimart.checkout.final_bill
 
+import android.app.Activity.RESULT_OK
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,8 +18,15 @@ import com.savage9ishere.tiwarimart.main_flow.MainActivity
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
 import com.savage9ishere.tiwarimart.main_flow.ui.home.AddressItem
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
+import dev.shreyaspatil.easyupipayment.EasyUpiPayment
+import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener
+import dev.shreyaspatil.easyupipayment.model.PaymentApp
+import dev.shreyaspatil.easyupipayment.model.TransactionDetails
+import dev.shreyaspatil.easyupipayment.model.TransactionStatus
 
-class FinalBillFragment : Fragment() {
+const val REQUEST_CODE = 123
+
+class FinalBillFragment : Fragment(), PaymentStatusListener {
 
     private lateinit var viewModel: FinalBillViewModel
 
@@ -46,7 +56,60 @@ class FinalBillFragment : Fragment() {
         binding.itemsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
         binding.placeOrderButton.setOnClickListener {
-            viewModel.placeOrder()
+//            viewModel.placeOrder()
+            if (paymentMethod == "upi"){
+                val transactionId = "TID" + System.currentTimeMillis()
+                var s = ""
+                var total = 0
+                for (item in itemsList) {
+                    s += "${item.name}, ${item.price} \n"
+                    total += item.price.toInt()*item.qty
+                }
+                if(total < 500){
+                    total += 40
+                }
+
+//                try {
+//                    val easyUpiPayment = EasyUpiPayment(requireActivity()){
+//                        this.paymentApp = PaymentApp.ALL
+//                        this.payeeVpa = "katariaanant4@oksbi"
+//                        this.payeeName = "Tiwari Mart"
+//                        this.transactionId = transactionId
+//                        this.transactionRefId = transactionId
+//                        this.payeeMerchantCode = ""
+//                        this.description = s
+//                        this.amount = "$total.00"
+//                    }
+//
+//                    easyUpiPayment.setPaymentStatusListener(this)
+//
+//                    easyUpiPayment.startPayment()
+//
+//                } catch (e : Exception){
+//                    e.printStackTrace()
+//                    Toast.makeText(context, "Error : ${e.message}", Toast.LENGTH_SHORT).show()
+//                }
+
+                val uri = Uri.Builder()
+                    .scheme("upi")
+                    .authority("pay")
+                    .appendQueryParameter("pa", "katariaanant4@oksbi")
+                    .appendQueryParameter("pn", "Tiwari Mart")
+                    .appendQueryParameter("tr", transactionId)
+                    .appendQueryParameter("tn", transactionId)
+                    .appendQueryParameter("am", total.toString())
+                    .appendQueryParameter("cu", "INR")
+                    .build()
+
+                val intent = Intent(Intent.ACTION_VIEW)
+                intent.data = uri
+
+                val chooser = Intent.createChooser(intent, "Pay with")
+                startActivityForResult(chooser, REQUEST_CODE)
+            }
+            else {
+                viewModel.placeOrder()
+            }
         }
 
         viewModel.orderPlacedSuccessfully.observe(viewLifecycleOwner, {
@@ -74,5 +137,46 @@ class FinalBillFragment : Fragment() {
 
         return binding.root
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE){
+            if (resultCode == RESULT_OK){
+                val status = data!!.getStringExtra("Status")
+                if (status.equals("SUCCESS")){
+                    viewModel.placeOrder()
+                }
+                else if(status.equals("FAILURE")){
+                    Toast.makeText(context, "Payment cancelled, Try again", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
+
+    override fun onTransactionCancelled() {
+        Toast.makeText(context, "Payment Cancelled", Toast.LENGTH_SHORT).show()
+    }
+
+    override fun onTransactionCompleted(transactionDetails: TransactionDetails) {
+        when(transactionDetails.transactionStatus){
+            TransactionStatus.FAILURE -> onTransactionFailed()
+            TransactionStatus.SUBMITTED -> onTransactionSubmitted()
+            TransactionStatus.SUCCESS -> onTransactionSuccess()
+        }
+    }
+
+    private fun onTransactionSuccess() {
+        viewModel.placeOrder()
+    }
+
+    private fun onTransactionSubmitted() {
+        viewModel.placeOrder()
+    }
+
+    private fun onTransactionFailed() {
+        Toast.makeText(context, "Transaction failed", Toast.LENGTH_SHORT).show()
+    }
+
+
 
 }

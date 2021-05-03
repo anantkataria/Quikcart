@@ -1,6 +1,5 @@
 package com.savage9ishere.tiwarimart.fragment_container.particular_item
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -72,8 +71,6 @@ class ParticularItemViewModel(
     val stockAvailability: LiveData<String>
         get() = _stockAvailability
 
-    //todo setting for address
-    //todo secure transaction setting
 
     private val _itemDescription = MutableLiveData<String>()
     val itemDescription: LiveData<String>
@@ -93,7 +90,7 @@ class ParticularItemViewModel(
 
         setItemNameAndPriceToUi()
 
-        val totalRating = item.ratingTotal.toFloat()
+        val totalRating = item.ratingTotal
         val peopleRatingCount = item.peopleRatingCount
         if(peopleRatingCount != 0L) {
             _rating.value = totalRating/peopleRatingCount.toFloat()

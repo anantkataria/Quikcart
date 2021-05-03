@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.firebase.storage.ktx.storageMetadata
@@ -48,7 +49,11 @@ class FavoritesFragment : Fragment() {
     }
 
     private fun onClick(favoritesEntity: FavoritesEntity) {
-        Toast.makeText(context, "yet to implement", Toast.LENGTH_SHORT).show()
+        val b = Bundle()
+        b.putString("key", favoritesEntity.databaseKey)
+        b.putString("categoryName", favoritesEntity.categoryName)
+        b.putString("itemName", favoritesEntity.itemName)
+        findNavController().navigate(R.id.action_favoritesFragment_to_loadItemDataFragment, b)
     }
 
 }
