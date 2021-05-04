@@ -7,7 +7,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
@@ -15,6 +14,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -26,7 +26,6 @@ import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.databinding.ActivityMainBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Item
-import com.savage9ishere.tiwarimart.search.SearchActivity
 import com.savage9ishere.tiwarimart.search.SearchViewModel
 import com.savage9ishere.tiwarimart.search.SearchViewModelFactory
 import com.savage9ishere.tiwarimart.search.sample.SampleActivity
@@ -34,12 +33,17 @@ import com.savage9ishere.tiwarimart.search.search_database.CategoryDao
 import com.savage9ishere.tiwarimart.search.search_database.CategoryEntity
 import com.savage9ishere.tiwarimart.search.search_database.CategoryWiseDao
 import com.savage9ishere.tiwarimart.search.search_database.CategoryWiseEntity
+import com.savage9ishere.tiwarimart.store_closed.StoreClosedActivity
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var categoryDataSource: CategoryDao
     private lateinit var categoryWiseDataSource: CategoryWiseDao
     private lateinit var viewModel: SearchViewModel
+
+    private interface AfterCheck {
+        fun afterCheck(isOpen: Boolean, openingAgainTimeString: String)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -74,16 +78,64 @@ class MainActivity : AppCompatActivity() {
         if (user == null) {
             auth.signInAnonymously().addOnCompleteListener {
                 if (it.isSuccessful) {
-                    binding.container.visibility = View.VISIBLE
-                    addCategoriesToSearchDatabase()
-                    addCategoryWiseItemsToDatabase()
+                    checkStoreIsOpenOrClosed(object : AfterCheck {
+                        override fun afterCheck(isOpen: Boolean, openingAgainTimeString: String) {
+                            if (isOpen) {
+                                binding.container.visibility = View.VISIBLE
+                                addCategoriesToSearchDatabase()
+                                addCategoryWiseItemsToDatabase()
+                            } else {
+                                val intent = Intent(
+                                    this@MainActivity,
+                                    StoreClosedActivity::class.java
+                                )
+                                intent.putExtra("openingAgainTimeString", openingAgainTimeString)
+                                intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                                startActivity(intent)
+                            }
+                        }
+                    })
                 } else {
-                    Toast.makeText(this, "Something went wrong", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@MainActivity, "Something went wrong", Toast.LENGTH_SHORT).show()
                 }
             }
         } else {
-            binding.container.visibility = View.VISIBLE
+            checkStoreIsOpenOrClosed(object : AfterCheck {
+                override fun afterCheck(isOpen: Boolean, openingAgainTimeString: String) {
+                    if (isOpen) {
+                        binding.container.visibility = View.VISIBLE
+                        addCategoriesToSearchDatabase()
+                        addCategoryWiseItemsToDatabase()
+                    } else {
+                        val intent = Intent(
+                            this@MainActivity,
+                            StoreClosedActivity::class.java
+                        )
+                        intent.putExtra("openingAgainTimeString", openingAgainTimeString)
+                        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                        startActivity(intent)
+                    }
+                }
+            })
         }
+    }
+
+    private fun checkStoreIsOpenOrClosed(interfac: AfterCheck) {
+        Firebase.database.reference.child("openOrClose").addValueEventListener(object :
+            ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val isOpen = snapshot.child("isOpen").getValue(Boolean::class.java)
+                val openingAgainTimeString =
+                    snapshot.child("openingAgainTime").getValue(String::class.java)
+
+                interfac.afterCheck(isOpen!!, openingAgainTimeString!!)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
     private fun addCategoriesToSearchDatabase() {
@@ -113,9 +165,19 @@ class MainActivity : AppCompatActivity() {
                     val item: Item? = s1.getValue(Item::class.java)
                     val discount = item!!.discount.toFloat()
                     val price = item.price.toFloat()
-                    val priceWithDiscount = price -(price*discount/100)
+                    val priceWithDiscount = price - (price * discount / 100)
                     val categoryWiseEntity =
-                        CategoryWiseEntity(itemName = item!!.name, priceWithDiscount = priceWithDiscount,itemCategory = itemCategory!!, discount = item.discount, ratingCount = item.peopleRatingCount, ratingTotal = item.ratingTotal, price = item.price, imageUrl = item.photosUrl[0], inStock = item.inStock)
+                        CategoryWiseEntity(
+                            itemName = item.name,
+                            priceWithDiscount = priceWithDiscount,
+                            itemCategory = itemCategory!!,
+                            discount = item.discount,
+                            ratingCount = item.peopleRatingCount,
+                            ratingTotal = item.ratingTotal,
+                            price = item.price,
+                            imageUrl = item.photosUrl[0],
+                            inStock = item.inStock
+                        )
                     viewModel.insertCategoryItem(categoryWiseEntity)
                 }
             }

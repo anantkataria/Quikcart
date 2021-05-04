@@ -4,6 +4,7 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
@@ -78,6 +79,9 @@ class SearchResultActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search_result)
 
+        title = "Search Results"
+        supportActionBar!!.setDisplayHomeAsUpEnabled(true)
+
         recyclerView = findViewById(R.id.search_result_recycler_view)
         adapter = SearchResultAdapter { onClick(it) }
         recyclerView.adapter = adapter
@@ -151,6 +155,18 @@ class SearchResultActivity : AppCompatActivity() {
 
         sortButton.setOnClickListener {
             sortItems()
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            android.R.id.home -> {
+                onBackPressed();
+                true
+            }
+            else -> {
+                super.onOptionsItemSelected(item)
+            }
         }
     }
 

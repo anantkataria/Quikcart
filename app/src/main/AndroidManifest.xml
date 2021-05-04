@@ -11,8 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TiwariMart">
-        <activity android:name=".search.sample.SampleActivity"
-            android:theme="@style/Theme.MysearchDialog"></activity>
+        <activity android:name=".store_closed.StoreClosedActivity"></activity>
+        <activity
+            android:name=".search.sample.SampleActivity"
+            android:theme="@style/Theme.MysearchDialog" />
         <activity android:name=".search.search_result.SearchResultActivity" />
         <activity android:name=".search.SearchActivity" />
         <activity android:name=".checkout.CheckoutActivity" />
