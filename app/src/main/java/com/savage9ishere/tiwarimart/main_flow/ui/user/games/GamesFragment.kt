@@ -29,6 +29,12 @@ class GamesFragment : Fragment() {
             }
         }
 
+        binding.rouletteGameImageButton.setOnClickListener {
+            if (findNavController().currentDestination?.id == R.id.gamesFragment){
+                findNavController().navigate(R.id.action_gamesFragment_to_rouletteFragment)
+            }
+        }
+
         return binding.root
     }
 

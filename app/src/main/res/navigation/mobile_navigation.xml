@@ -173,9 +173,20 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_gamesFragment_to_rouletteFragment"
+            app:destination="@id/rouletteFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/slotMachineFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.games.slot_machine.SlotMachineFragment"
         android:label="SlotMachineFragment" />
+    <fragment
+        android:id="@+id/rouletteFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.games.roulette.RouletteFragment"
+        android:label="RouletteFragment" />
 </navigation>
