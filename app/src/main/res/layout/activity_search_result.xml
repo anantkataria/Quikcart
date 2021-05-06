@@ -63,7 +63,7 @@
             android:background="@drawable/button"
             android:drawableLeft="@drawable/ic_filter"
             android:text="Filter"
-            app:backgroundTint="@color/purple_500"
+            app:backgroundTint="#FFC554"
             android:textAllCaps="false"
             android:layout_marginTop="10dp">
         </Button>
@@ -73,15 +73,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/button"
             android:drawableLeft="@drawable/ic_sort"
             android:text="Sort"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            app:backgroundTint="@color/purple_500"
-            android:textAllCaps="false">
-        </Button>
+            android:textAllCaps="false"
+            app:backgroundTint="#FFC554"/>
 
     </LinearLayout>
 

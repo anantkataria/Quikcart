@@ -21,22 +21,23 @@
                 android:id="@+id/first_line_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/purple_500"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="16dp"
-                android:gravity="center"
                 android:text="Tell us how can we improve?"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                 />
+                android:textColor="#30333B " />
 
             <EditText
                 android:id="@+id/concern_edit_text"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="16dp"
+                android:layout_marginRight="20dp"
+                android:background="#F2F3F2 "
                 android:hint="We take your concerns seriously and will reply as soon as possible"
-                android:lines="10" />
+                android:lines="8"
+                android:padding="10dp" />
 
             <ProgressBar
                 android:id="@+id/progress_bar"
@@ -50,16 +51,25 @@
                 android:id="@+id/add_screenshots_text_view"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
                 android:layout_marginTop="32dp"
-                android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
                 android:text="Add photos (optional)"
-                android:textColor="@color/purple_500" />
+                android:textColor="#30333B " />
+
+            <TextView
+                android:id="@+id/hardcoded_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="5dp"
+                android:text="Long press on image to remove"
+                android:textColor="#C4C4C4 " />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="20dp"
                 android:orientation="horizontal">
 
                 <ImageView
@@ -67,7 +77,7 @@
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/ic_add2"
+                    android:background="@drawable/add_image"
                     android:scaleType="centerCrop" />
 
                 <ImageView
@@ -76,7 +86,7 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/ic_add2"
+                    android:background="@drawable/add_image"
                     android:scaleType="centerCrop" />
 
                 <ImageView
@@ -85,32 +95,28 @@
                     android:layout_height="70dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginTop="16dp"
-                    android:background="@drawable/ic_add2"
+                    android:background="@drawable/add_image"
                     android:scaleType="centerCrop" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/hardcoded_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Long press on image to remove" />
-
             <Button
                 android:id="@+id/next_button"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:gravity="center"
-                android:paddingStart="64dp"
-                android:paddingEnd="64dp"
-                android:layout_gravity="center_horizontal"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="8dp"
                 android:layout_marginTop="64dp"
-                style="?android:attr/buttonBarButtonStyle"
-                android:text="NEXT" />
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="#FFC554 "
+                android:gravity="center"
+                android:maxWidth="0dp"
+                android:maxHeight="0dp"
+                android:text="Submit"
+                android:textAllCaps="false"
+                android:textColor="@color/white" />
 
         </LinearLayout>
 

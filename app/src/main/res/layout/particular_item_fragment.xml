@@ -31,6 +31,8 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:lineSpacingExtra="2dp"
+                    android:textColor="#30333B"
+                    android:textSize="18sp"
                     tools:text="Tribute Chocolate Peanut Butter (Creamy) (1 kg) | High in protein | Goodness of Dark Chocolate | No Cholestrol | Rich in Antioxidant" />
 
                 <ImageView
@@ -92,12 +94,12 @@
                 android:layout_marginEnd="8dp">
 
                 <TextView
-                    android:gravity="end"
-                    android:layout_marginEnd="8dp"
-                    android:layout_weight="1"
                     android:id="@+id/size_hard_coded"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:gravity="end"
                     android:text="SIZE"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
@@ -199,28 +201,40 @@
 
             </LinearLayout>
 
-            <Button
-                android:id="@+id/buy_now_button"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/qty_relative_layout"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Buy Now" />
 
-            <Button
-                android:id="@+id/add_to_cart_button"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/buy_now_button"
-                android:layout_margin="8dp"
-                android:text="Add to Cart" />
+                android:orientation="horizontal"
+                android:layout_below="@id/qty_relative_layout"
+                android:id="@+id/cart_buy_button"
+                >
+                <Button
+                    android:id="@+id/buy_now_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:text="Buy Now"
+                    android:backgroundTint="#FFC554"/>
+
+                <Button
+                    android:id="@+id/add_to_cart_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/buy_now_button"
+                    android:text="Add to Cart"
+                    android:backgroundTint="#0B6F3A
+"
+                    />
+
+            </LinearLayout>
 
             <RelativeLayout
                 android:id="@+id/secure_transaction_relative_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/add_to_cart_button"
+                android:layout_below="@id/cart_buy_button"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp">
 
@@ -297,13 +311,22 @@ Pretium quam vulputate dignissim suspendisse in est. Diam donec adipiscing trist
             </RelativeLayout>
 
             <Button
-                android:layout_margin="8dp"
-                android:text="Write a Review"
-                style="?android:attr/buttonBarButtonStyle"
                 android:id="@+id/write_review_button"
-                android:layout_below="@id/customer_reviews_recycler_view"
+                style="?android:attr/buttonBarButtonStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@id/customer_reviews_recycler_view"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:backgroundTint="#F2F3F2 "
+                android:drawableEnd="@drawable/navigate_to_next_arrow"
+                android:text="Write a Review"
+                android:textColor="@color/black"
+                app:cornerRadius="5dp"
+                app:strokeColor="@color/grey3"
+                app:strokeWidth="1dp" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/customer_reviews_recycler_view"

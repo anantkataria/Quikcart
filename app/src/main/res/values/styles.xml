@@ -41,4 +41,24 @@
         <item name="android:layout_marginLeft">10dp</item>
     </style>
 
+    <style name="order_details">
+        <item name="color">@color/dark_grey</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">16sp</item>
+
+    </style>
+
+    <style name="order_details_hardcoded">
+        <item name="color">@color/dark_grey</item>
+        <item name="android:textStyle">bold</item>
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">20sp</item>
+
+    </style>
+
+    <style name="login">
+        <item name="android:textSize">26sp</item>
+        <item name="android:textColor">#30333B</item>
+    </style>
+
 </resources>

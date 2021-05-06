@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
         <variable
@@ -47,84 +48,104 @@
                 tools:context=".main_flow.ui.user.profile.ProfileFragment">
 
                 <ImageView
-                    android:src="@drawable/ic_person"
                     android:id="@+id/profile_image"
-                    android:layout_marginTop="32dp"
-                    android:layout_centerHorizontal="true"
                     android:layout_width="150dp"
-                    android:layout_height="150dp"/>
+                    android:layout_height="150dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="32dp"
+                    android:src="@drawable/person_profile" />
 
                 <LinearLayout
-                    android:gravity="center"
                     android:id="@+id/ll1"
-                    android:orientation="horizontal"
-                    android:layout_below="@id/profile_image"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/profile_image"
+                    android:layout_marginTop="20dp"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
                     <Button
                         android:id="@+id/add_photo_button"
-                        android:text="Add Photo"
                         style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+
+                        android:layout_height="wrap_content"
+                        android:backgroundTint="#FFC554"
+                        android:text="+ Add Photo"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF "
+                        android:textStyle="bold" />
 
                     <Button
                         android:id="@+id/remove_photo_button"
-                        android:text="Remove"
                         style="?android:attr/buttonBarButtonStyle"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:backgroundTint="#0B6F3A "
+                        android:text="Remove"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF "
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/name_text_input_layout"
-                    android:layout_below="@id/ll1"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Name"
+                    android:layout_below="@id/ll1"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginTop="32dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:layout_marginEnd="16dp"
+                    android:hint="Name"
+                    app:hintTextColor="@color/black">
+
                     <com.google.android.material.textfield.TextInputEditText
-                        android:text="@{viewModel.userName}"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:background="#F2F3F2 "
+                        android:text="@{viewModel.userName}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/email_text_input_layout"
-                    android:layout_below="@id/name_text_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Email"
+                    android:layout_below="@id/name_text_input_layout"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:layout_marginEnd="16dp"
+                    android:hint="Email"
+                    app:hintTextColor="@color/black">
+
                     <com.google.android.material.textfield.TextInputEditText
-                        android:text="@{viewModel.userEmail}"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:background="#F2F3F2 "
+                        android:text="@{viewModel.userEmail}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/phone_text_input_layout"
-                    android:layout_below="@id/email_text_input_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Phone"
+                    android:layout_below="@id/email_text_input_layout"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="16dp"
                     android:layout_marginTop="16dp"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    android:layout_marginEnd="16dp"
+                    android:hint="Phone"
+                    app:hintTextColor="@color/black">
+
                     <com.google.android.material.textfield.TextInputEditText
-                        android:text="@{viewModel.userPhone}"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+                        android:layout_height="match_parent"
+                        android:background="#F2F3F2 "
+                        android:text="@{viewModel.userPhone}" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <RelativeLayout
@@ -135,22 +156,27 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:layout_centerVertical="true"
                         android:id="@+id/address_hard_coded"
-                        android:text="Addresses"
-                        android:layout_marginStart="16dp"
-                        android:textSize="28sp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="16dp"
+                        android:text="Addresses"
+                        android:textColor="#30333B "
+                        android:textSize="28sp" />
 
                     <Button
                         android:id="@+id/add_address_button"
-                        android:text="Add"
-                        android:layout_marginEnd="16dp"
                         style="?android:attr/buttonBarButtonStyle"
-                        android:layout_alignParentEnd="true"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="16dp"
+                        android:backgroundTint="#FFC554 "
+                        android:text="+ Add"
+                        android:textAllCaps="false"
+                        android:textColor="#FFFFFF "
+                        android:textStyle="bold" />
 
                 </RelativeLayout>
 
@@ -167,16 +193,22 @@
 
                 <Button
                     android:id="@+id/save_changes_button"
-                    android:text="Proceed to save changes"
-                    android:layout_below="@id/address_recycler_view"
-                    android:layout_margin="16dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/address_recycler_view"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:backgroundTint="#FFC554 "
+                    android:text="Proceed to save changes"
+                    android:textStyle="bold" />
 
             </RelativeLayout>
 
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
+
 
 </layout>

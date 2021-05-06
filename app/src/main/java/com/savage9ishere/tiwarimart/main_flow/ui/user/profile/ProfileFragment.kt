@@ -114,7 +114,7 @@ class ProfileFragment : Fragment() {
                         .load(it.toUri().buildUpon().scheme("https").build())
                         .into(binding.profileImage)
                 } else if (it == "") {
-                    binding.profileImage.setImageResource(R.drawable.ic_person)
+                    binding.profileImage.setImageResource(R.drawable.person_profile)
                 }
             }
         })

@@ -15,35 +15,51 @@
             android:layout_height="wrap_content"
             tools:context=".checkout.address.AddressFragment">
 
-            <TextView
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:textColor="@color/purple_500"
-                android:text="Select Address"
-                android:gravity="center"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
-                android:id="@+id/select_address_hard_coded"
+
+            <RelativeLayout
+                android:id="@+id/add_select_layout"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal">
+
+                <TextView
+                    android:id="@+id/select_address_hard_coded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:text="Select Address"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="#30333B "
+                    android:textStyle="bold" />
+
+                <Button
+                    android:id="@+id/add_new_address_button"
+                    style="?android:attr/buttonBarButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="8dp"
+                    android:backgroundTint="#FFC554 "
+                    android:text="+ Add"
+                    android:textAllCaps="false"
+                    android:textColor="#FFFFFF "
+                    android:textSize="16sp" />
+            </RelativeLayout>
+
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_below="@+id/select_address_hard_coded"
                 android:id="@+id/address_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/add_select_layout"
+                android:layout_marginTop="5dp" />
 
-            <Button
-                android:id="@+id/add_new_address_button"
-                android:text="Add new Address"
-                android:layout_marginTop="64dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
-                style="?android:attr/buttonBarButtonStyle"
-                android:layout_below="@+id/address_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+
 
         </RelativeLayout>
 

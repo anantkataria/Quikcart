@@ -16,31 +16,37 @@
             tools:context=".main_flow.ui.user.about.AboutFragment">
 
             <TextView
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:text="This app is, as the name suggests, is dedicated to our instructor sir, Saurabh Tiwari.\n\nDear sir, Thank you for giving us this project.\n\nWe learned a lot through it."
-                android:layout_margin="8dp"
                 android:id="@+id/about_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginBottom="8dp"
+                android:text="This app is, as the name suggests, is dedicated to our instructor sir, Saurabh Tiwari.\n\nDear sir, Thank you for giving us this project.\n\nWe learned a lot through it."
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
-                android:text="Our Team"
-                android:gravity="center"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@color/purple_500"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:layout_below="@+id/about_text"
                 android:id="@+id/our_team_text"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/about_text"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:text="The Team :"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="#30333B "
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_marginTop="8dp"
-                android:layout_below="@+id/our_team_text"
                 android:id="@+id/team_members_recycler_view"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/our_team_text"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="8dp" />
 
         </RelativeLayout>
 

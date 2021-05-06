@@ -33,10 +33,14 @@
 
             <Button
                 android:visibility="gone"
+                android:layout_marginTop="10dp"
                 android:id="@+id/proceed_to_buy_button"
                 android:text="Proceed to Buy"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content"
+                android:backgroundTint="#FFC554"
+                android:textAllCaps="true"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:visibility="gone"
