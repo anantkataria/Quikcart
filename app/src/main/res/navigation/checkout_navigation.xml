@@ -12,13 +12,25 @@
         tools:layout="@layout/address_fragment">
         <action
             android:id="@+id/action_addressFragment_to_paymentFragment"
-            app:destination="@id/paymentFragment" />
+            app:destination="@id/paymentFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_addressFragment_to_addNewAddressFragment"
-            app:destination="@id/addNewAddressFragment" />
+            app:destination="@id/addNewAddressFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
         <action
             android:id="@+id/action_addressFragment_to_editAddressFragment"
-            app:destination="@id/editAddressFragment" />
+            app:destination="@id/editAddressFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/paymentFragment"
@@ -27,7 +39,11 @@
         tools:layout="@layout/payment_fragment">
         <action
             android:id="@+id/action_paymentFragment_to_finalBillFragment"
-            app:destination="@id/finalBillFragment" />
+            app:destination="@id/finalBillFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/addNewAddressFragment"
