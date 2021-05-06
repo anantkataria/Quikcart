@@ -15,6 +15,7 @@ import com.savage9ishere.tiwarimart.databinding.CartListItemBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemEntity
 
 class CartItemAdapter(
+    private val onItemClick : (CartItemEntity) -> Unit,
     private val onIncrementClick: (CartItemEntity) -> Unit,
     private val onDecrementClick: (CartItemEntity) -> Unit,
     private val onSaveForLaterClick: (CartItemEntity) -> Unit,
@@ -22,6 +23,7 @@ class CartItemAdapter(
 ): ListAdapter<CartItemEntity, CartItemAdapter.ViewHolder>(CartItemDiffCallback()) {
     class ViewHolder private constructor(
         val binding: CartListItemBinding,
+        val onItemClick: (CartItemEntity) -> Unit,
         val onIncrementClick: (CartItemEntity) -> Unit,
         val onDecrementClick: (CartItemEntity) -> Unit,
         val onSaveForLaterClick: (CartItemEntity) -> Unit,
@@ -40,6 +42,12 @@ class CartItemAdapter(
         private var cartItem : CartItemEntity? = null
 
         init {
+            binding.root.setOnClickListener {
+                cartItem?.let {
+                    onItemClick(it)
+                }
+            }
+
             decrementImage.setOnClickListener {
 //                qtyCountText.text = (qtyCountText.text.toString().toInt() + 1).toString()
                 cartItem?.let {
@@ -85,7 +93,8 @@ class CartItemAdapter(
                 .into(itemImage)
 
             itemNameText.text = item.itemName
-            itemPriceText.text = item.itemPrice.toString()
+            val price = "₹ ${item.itemPrice}"
+            itemPriceText.text = price
 
             if(item.stockAvailability){
                 stockAvailabilityText.text = "In stock."
@@ -103,6 +112,7 @@ class CartItemAdapter(
 
         companion object {
             fun from(parent: ViewGroup,
+                     onItemClick: (CartItemEntity) -> Unit,
                      onIncrementClick: (CartItemEntity) -> Unit,
                      onDecrementClick: (CartItemEntity) -> Unit,
                      onSaveForLaterClick: (CartItemEntity) -> Unit,
@@ -110,13 +120,13 @@ class CartItemAdapter(
             ): ViewHolder{
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = CartListItemBinding.inflate(layoutInflater)
-                return ViewHolder(binding, onIncrementClick, onDecrementClick, onSaveForLaterClick, onDeleteClick)
+                return ViewHolder(binding, onItemClick,onIncrementClick, onDecrementClick, onSaveForLaterClick, onDeleteClick)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent, onIncrementClick, onDecrementClick, onSaveForLaterClick, onDeleteClick)
+        return ViewHolder.from(parent, onItemClick, onIncrementClick, onDecrementClick, onSaveForLaterClick, onDeleteClick)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

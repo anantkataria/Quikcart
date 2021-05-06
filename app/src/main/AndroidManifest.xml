@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TiwariMart">
-        <activity android:name=".store_closed.StoreClosedActivity"></activity>
+        <activity android:name=".search.search_result.on_item_click.SearchItemActivity"></activity>
+        <activity android:name=".store_closed.StoreClosedActivity" />
         <activity
             android:name=".search.sample.SampleActivity"
             android:theme="@style/Theme.MysearchDialog" />

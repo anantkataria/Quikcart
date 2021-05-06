@@ -176,7 +176,8 @@ class MainActivity : AppCompatActivity() {
                             ratingTotal = item.ratingTotal,
                             price = item.price,
                             imageUrl = item.photosUrl[0],
-                            inStock = item.inStock
+                            inStock = item.inStock,
+                            itemKey = item.key!!
                         )
                     viewModel.insertCategoryItem(categoryWiseEntity)
                 }

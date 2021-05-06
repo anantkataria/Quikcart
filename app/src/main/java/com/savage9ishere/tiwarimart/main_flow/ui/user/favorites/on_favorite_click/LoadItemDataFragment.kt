@@ -24,11 +24,17 @@ import com.savage9ishere.tiwarimart.fragment_container.particular_item.ReviewsAd
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Item
+import java.lang.IllegalArgumentException
+import java.lang.IllegalStateException
 
 class LoadItemDataFragment : Fragment() {
 
     private lateinit var viewModel: LoadItemDataViewModel
     private lateinit var item : Item
+
+    private var key : String? = null
+    private var categoryName : String? = null
+    private var itemName : String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +42,17 @@ class LoadItemDataFragment : Fragment() {
     ): View {
         val binding = LoadItemDataFragmentBinding.inflate(inflater)
 
-        val key = requireArguments().getString("key")
-        val categoryName = requireArguments().getString("categoryName")
-        val itemName = requireArguments().getString("itemName")
+        try {
+            key = requireArguments().getString("key")
+            categoryName = requireArguments().getString("categoryName")
+            itemName = requireArguments().getString("itemName")
+        } catch (e: IllegalStateException){
+            val bundle = requireActivity().intent.extras
+            key = bundle!!.getString("key")
+            categoryName = bundle.getString("categoryName")
+            itemName = bundle.getString("itemName")
+        }
+
 
         (activity as AppCompatActivity).supportActionBar?.title = itemName
 
@@ -64,7 +78,10 @@ class LoadItemDataFragment : Fragment() {
             val b = Bundle()
             b.putParcelable("item", item)
             b.putString("category_name", categoryName)
-            findNavController().navigate(R.id.action_loadItemDataFragment_to_reviewFragment2, b)
+            if (findNavController().currentDestination?.id == R.id.loadItemDataFragment)
+                findNavController().navigate(R.id.action_loadItemDataFragment_to_reviewFragment2, b)
+            else if (findNavController().currentDestination?.id == R.id.loadItemDataFragment2)
+                findNavController().navigate(R.id.action_loadItemDataFragment2_to_reviewFragment3, b)
         }
 
         viewModel.thisItemPublic.observe(viewLifecycleOwner, {

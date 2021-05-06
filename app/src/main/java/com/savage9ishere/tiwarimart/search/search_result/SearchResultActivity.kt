@@ -21,6 +21,7 @@ import com.savage9ishere.tiwarimart.search.sample.SampleActivity
 import com.savage9ishere.tiwarimart.search.search_database.CategoryDao
 import com.savage9ishere.tiwarimart.search.search_database.CategoryWiseDao
 import com.savage9ishere.tiwarimart.search.search_database.CategoryWiseEntity
+import com.savage9ishere.tiwarimart.search.search_result.on_item_click.SearchItemActivity
 
 class SearchResultActivity : AppCompatActivity() {
 
@@ -574,6 +575,12 @@ class SearchResultActivity : AppCompatActivity() {
     }
 
     private fun onClick(it: CategoryWiseEntity) {
-        Toast.makeText(this, "YO IT CLICKED", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this,SearchItemActivity::class.java)
+        val b = Bundle()
+        b.putString("itemName", it.itemName)
+        b.putString("key", it.itemKey)
+        b.putString("categoryName", it.itemCategory)
+        intent.putExtras(b)
+        startActivity(intent)
     }
 }

@@ -36,5 +36,8 @@ data class CategoryWiseEntity(
     val imageUrl : String = "",
 
     @ColumnInfo(name =  "in_stock")
-    val inStock : Boolean = false
+    val inStock : Boolean = false,
+
+    @ColumnInfo(name = "item_key")
+    val itemKey : String = ""
 )

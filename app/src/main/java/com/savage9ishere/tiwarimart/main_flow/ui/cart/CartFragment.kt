@@ -10,12 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
+import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.authentication.AuthActivity
 import com.savage9ishere.tiwarimart.checkout.CheckoutActivity
 import com.savage9ishere.tiwarimart.databinding.FragmentCartBinding
+import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemEntity
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
 
 class CartFragment : Fragment() {
@@ -40,7 +43,9 @@ class CartFragment : Fragment() {
         viewModel =
                 ViewModelProvider(this, viewModelFactory).get(CartViewModel::class.java)
 
-        val cartAdapter = CartItemAdapter(
+        val cartAdapter = CartItemAdapter({
+                                          onItemClick(it)
+        },
             {
                 viewModel.onIncrementClick(it)
         },
@@ -156,5 +161,13 @@ class CartFragment : Fragment() {
 
         return binding.root
 
+    }
+
+    private fun onItemClick(it: CartItemEntity) {
+        val b = Bundle()
+        b.putString("key", it.itemKey)
+        b.putString("categoryName", it.itemCategory)
+        b.putString("itemName", it.itemName)
+        findNavController().navigate(R.id.action_navigation_cart_to_loadItemDataFragment, b)
     }
 }

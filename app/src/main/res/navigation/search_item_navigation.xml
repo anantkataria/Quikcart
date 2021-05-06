@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/search_item_navigation.xml"
+    app:startDestination="@id/loadItemDataFragment2">
+
+    <fragment
+        android:id="@+id/loadItemDataFragment2"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.favorites.on_favorite_click.LoadItemDataFragment"
+        android:label="LoadItemDataFragment" >
+        <action
+            android:id="@+id/action_loadItemDataFragment2_to_cartFragment3"
+            app:destination="@id/cartFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_loadItemDataFragment2_to_reviewFragment3"
+            app:destination="@id/reviewFragment3"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/cartFragment3"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.cart.CartFragment"
+        android:label="CartFragment" />
+    <fragment
+        android:id="@+id/reviewFragment3"
+        android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.review.ReviewFragment"
+        android:label="ReviewFragment" />
+</navigation>
