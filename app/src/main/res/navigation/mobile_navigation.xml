@@ -64,6 +64,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_user_to_gamesFragment"
+            app:destination="@id/gamesFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
@@ -155,4 +162,20 @@
         android:id="@+id/reviewFragment2"
         android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.review.ReviewFragment"
         android:label="ReviewFragment" />
+    <fragment
+        android:id="@+id/gamesFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.games.GamesFragment"
+        android:label="Games" >
+        <action
+            android:id="@+id/action_gamesFragment_to_slotMachineFragment"
+            app:destination="@id/slotMachineFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/slotMachineFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.games.slot_machine.SlotMachineFragment"
+        android:label="SlotMachineFragment" />
 </navigation>

@@ -19,7 +19,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 import com.savage9ishere.tiwarimart.R
-import com.savage9ishere.tiwarimart.databinding.FeedbackFragmentBinding
 
 class FeedbackFragment : Fragment() {
 
@@ -41,7 +40,7 @@ class FeedbackFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FeedbackFragmentBinding.inflate(inflater)
+        val binding = com.savage9ishere.tiwarimart.databinding.FeedbackFragmentBinding.inflate(inflater)
 
         viewModel = ViewModelProvider(this).get(FeedbackViewModel::class.java)
 
@@ -151,12 +150,12 @@ class FeedbackFragment : Fragment() {
         emailIntent.putParcelableArrayListExtra(Intent.EXTRA_STREAM, uris)
         emailIntent.selector = selectorIntent
 
-        if (emailIntent.resolveActivity(requireActivity().packageManager) != null){
+//        if (emailIntent.resolveActivity(requireActivity().packageManager) != null){
             startActivityForResult(emailIntent, 69)
-        }
-        else {
-            Toast.makeText(context, "No email client app found!", Toast.LENGTH_SHORT).show()
-        }
+//        }
+//        else {
+//            Toast.makeText(context, "No email client app found!", Toast.LENGTH_SHORT).show()
+//        }
     }
 
     private fun hideKeyboard(requireActivity: FragmentActivity) {
@@ -218,7 +217,7 @@ class FeedbackFragment : Fragment() {
             REQUEST_IMAGE2_GET -> {
                 if (resultCode == RESULT_OK){
                     uri2 = data!!.data
-                    imageView1.setImageURI(uri2)
+                    imageView2.setImageURI(uri2)
                 }
                 else if (resultCode == RESULT_CANCELED){
                     Toast.makeText(context, "try again", Toast.LENGTH_SHORT).show()
@@ -228,7 +227,7 @@ class FeedbackFragment : Fragment() {
             REQUEST_IMAGE3_GET -> {
                 if (resultCode == RESULT_OK){
                     uri3 = data!!.data
-                    imageView1.setImageURI(uri3)
+                    imageView3.setImageURI(uri3)
                 }
                 else if (resultCode == RESULT_CANCELED){
                     Toast.makeText(context, "try again", Toast.LENGTH_SHORT).show()

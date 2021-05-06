@@ -29,7 +29,7 @@ class HomeAdapter(private val onClick: (Category) -> Unit) : ListAdapter<Categor
 
         fun bind(item: Category){
             currentCategory = item
-            categoryName.text = item.name
+//            categoryName.text = item.name
             Glide.with(categoryImage.context)
                 .load(item.uri.toUri().buildUpon().scheme("https").build())
                 .into(categoryImage)
