@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.databinding.ReviewListItemBinding
 import com.savage9ishere.tiwarimart.main_flow.ui.home.Review
 import kotlin.math.acos
@@ -34,6 +35,7 @@ class ReviewsAdapter(val activity : FragmentActivity) : ListAdapter<Review, Revi
 
             Glide.with(userImage.context)
                 .load(item.user.photoUrl.toUri().buildUpon().scheme("https").build())
+                .placeholder(R.drawable.person_profile)
                 .into(userImage)
 
             userNameText.text = item.user.name
