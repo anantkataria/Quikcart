@@ -21,7 +21,7 @@ class UserViewModel : ViewModel() {
         listItems.add(ListItem(R.drawable.ic_games, "Games", "Play games and win Exciting offers..."))
         listItems.add(ListItem(R.drawable.ic_feedback, "Feedback", "Write us your doubts, suggestions, complaints..."))
         listItems.add(ListItem(R.drawable.ic_favorites, "Favorites", "All your favorite items collection..."))
-        listItems.add(ListItem(R.drawable.ic_customer_support, "Customer Support", "Always here to help you, contact any time..."))
+        listItems.add(ListItem(R.drawable.ic_customer_support, "Support", "Always here to help you, contact any time..."))
         listItems.add(ListItem(R.drawable.ic_about, "About", "Who are we..."))
 //        listItems.add(ListItem(R.drawable.ic_logout, "Logout", "logout from your account"))
 

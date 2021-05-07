@@ -71,6 +71,13 @@
             app:exitAnim="@anim/slide_out_left"
             app:popEnterAnim="@anim/slide_in_left"
             app:popExitAnim="@anim/slide_out_right" />
+        <action
+            android:id="@+id/action_navigation_user_to_customerSupportFragment"
+            app:destination="@id/customerSupportFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/ordersFragment"
@@ -189,4 +196,23 @@
         android:id="@+id/rouletteFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.games.roulette.RouletteFragment"
         android:label="RouletteFragment" />
+    <fragment
+        android:id="@+id/customerSupportFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.customer_support.CustomerSupportFragment"
+        android:label="Customer Support">
+        <action
+            android:id="@+id/action_customerSupportFragment_to_chatFragment"
+            app:destination="@id/chatFragment"
+            app:enterAnim="@anim/slide_in_right"
+            app:exitAnim="@anim/slide_out_left"
+            app:popEnterAnim="@anim/slide_in_left"
+            app:popExitAnim="@anim/slide_out_right"
+            app:popUpTo="@id/customerSupportFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/chatFragment"
+        android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.customer_support.chat.ChatFragment"
+        android:label="Customer Support"
+        tools:layout="@layout/chat_fragment" />
 </navigation>

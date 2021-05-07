@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".main_flow.ui.user.customer_support.CustomerSupportFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
+    <data>
+
+    </data>
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Hello" />
+        tools:context=".main_flow.ui.user.customer_support.CustomerSupportFragment">
 
-</FrameLayout>
+        <TextView
+            android:id="@+id/t1"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:text="Please wait \nwhile we are connecting \nto the admin"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <ProgressBar
+            android:layout_marginEnd="16dp"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+
+    </RelativeLayout>
+</layout>

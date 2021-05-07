@@ -25,4 +25,5 @@
     <string name="item_order_status_format">STATUS : %s</string>
     <string name="item_order_delivered_or_cancelled_time_format">Order Delivered/Cancelled: %s</string>
     <string name="user">User</string>
+    <string name="api_key">vmhgk2k88b8n</string>
 </resources>
