@@ -4,7 +4,6 @@ import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -18,9 +17,7 @@ import com.savage9ishere.tiwarimart.main_flow.MainActivity
 import com.savage9ishere.tiwarimart.main_flow.ui.cart.cart_items_database.CartItemsDatabase
 import com.savage9ishere.tiwarimart.main_flow.ui.home.AddressItem
 import com.savage9ishere.tiwarimart.main_flow.ui.home.CartItems
-import dev.shreyaspatil.easyupipayment.EasyUpiPayment
 import dev.shreyaspatil.easyupipayment.listener.PaymentStatusListener
-import dev.shreyaspatil.easyupipayment.model.PaymentApp
 import dev.shreyaspatil.easyupipayment.model.TransactionDetails
 import dev.shreyaspatil.easyupipayment.model.TransactionStatus
 
@@ -29,6 +26,7 @@ const val REQUEST_CODE = 123
 class FinalBillFragment : Fragment(), PaymentStatusListener {
 
     private lateinit var viewModel: FinalBillViewModel
+    private lateinit var address: AddressItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +38,7 @@ class FinalBillFragment : Fragment(), PaymentStatusListener {
 
 
         val itemsList : ArrayList<CartItems>? = requireArguments().getParcelableArrayList("itemsList")
-        val address : AddressItem? = requireArguments().getParcelable("address")
+        address = requireArguments().getParcelable("address")!!
         val paymentMethod : String? = requireArguments().getString("paymentMethod")
 
         val application = requireNotNull(this.activity).application
@@ -54,6 +52,20 @@ class FinalBillFragment : Fragment(), PaymentStatusListener {
         val adapter = FinalBillAdapter()
         binding.itemsRecyclerView.adapter = adapter
         binding.itemsRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
+
+        binding.addDeliveryInstructionsButton.setOnClickListener {
+            binding.textInputLayout.visibility = View.VISIBLE
+            binding.addInstructionsButton.visibility = View.VISIBLE
+        }
+
+        binding.addInstructionsButton.setOnClickListener {
+            var instructions = ""
+            instructions = binding.textInputLayout.editText?.text.toString()
+            address.deliveryInstructions = instructions
+            binding.textInputLayout.visibility = View.GONE
+            binding.addInstructionsButton.visibility = View.GONE
+            Toast.makeText(context, "Instructions added", Toast.LENGTH_SHORT).show()
+        }
 
         binding.placeOrderButton.setOnClickListener {
 //            viewModel.placeOrder()
@@ -108,7 +120,7 @@ class FinalBillFragment : Fragment(), PaymentStatusListener {
                 startActivityForResult(chooser, REQUEST_CODE)
             }
             else {
-                viewModel.placeOrder()
+                viewModel.placeOrder(address)
             }
         }
 
@@ -144,7 +156,7 @@ class FinalBillFragment : Fragment(), PaymentStatusListener {
             if (resultCode == RESULT_OK){
                 val status = data!!.getStringExtra("Status")
                 if (status.equals("SUCCESS")){
-                    viewModel.placeOrder()
+                    viewModel.placeOrder(address)
                 }
                 else if(status.equals("FAILURE")){
                     Toast.makeText(context, "Payment cancelled, Try again", Toast.LENGTH_SHORT).show()
@@ -166,11 +178,11 @@ class FinalBillFragment : Fragment(), PaymentStatusListener {
     }
 
     private fun onTransactionSuccess() {
-        viewModel.placeOrder()
+        viewModel.placeOrder(address)
     }
 
     private fun onTransactionSubmitted() {
-        viewModel.placeOrder()
+        viewModel.placeOrder(address)
     }
 
     private fun onTransactionFailed() {

@@ -17,7 +17,7 @@ data class Review(val user : User = User(), val photosUrl : ArrayList<String> = 
 data class CartItems(val name: String = "", val size: String = "", val price: String = "", val priceOriginal: String = "", val qty : Int = 0, val photoUrl: String = "", val key: String? = "", val itemCategory: String = "", val deliveryDuration: String = "") : Parcelable
 
 @Parcelize
-data class AddressItem(val fullName: String = "", val mobileNumber: String = "", val pinCode: String = "", val flatHouseNoName: String = "", val areaColonyStreet: String = "", val landMark : String = "", val townCity : String = "", val state : String = "", val deliveryInstructions: String = "") : Parcelable{
+data class AddressItem(val fullName: String = "", val mobileNumber: String = "", val pinCode: String = "", val flatHouseNoName: String = "", val areaColonyStreet: String = "", val landMark : String = "", val townCity : String = "", val state : String = "", var deliveryInstructions: String = "") : Parcelable{
 
     fun getAddress() : String {
         return "$fullName\n$mobileNumber\n$flatHouseNoName,\n$areaColonyStreet, $landMark\n$townCity, $pinCode\n$state"

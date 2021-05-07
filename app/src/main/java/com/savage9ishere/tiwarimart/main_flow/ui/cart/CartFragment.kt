@@ -111,8 +111,20 @@ class CartFragment : Fragment() {
             }
         })
 
+        viewModel.everythingEmpty.observe(viewLifecycleOwner, {
+            it?.let {
+                if (it){
+                    binding.cartEmptyText.visibility = View.VISIBLE
+                }
+                else {
+                    binding.cartEmptyText.visibility = View.GONE
+                }
+            }
+        })
+
         viewModel.itemCount.observe(viewLifecycleOwner, {
             it?.let {
+                viewModel.checkEverythingEmpty()
                 if(it > 0){
                     binding.subtotalText.visibility = View.VISIBLE
                     binding.proceedToBuyButton.visibility = View.VISIBLE
@@ -134,6 +146,7 @@ class CartFragment : Fragment() {
 
         viewModel.itemCountForSaveForLater.observe(viewLifecycleOwner, {
             it?.let {
+                viewModel.checkEverythingEmpty()
                 if(it > 0){
                     binding.saveForLaterText.visibility = View.VISIBLE
                     binding.savedForLaterRecyclerView.visibility = View.VISIBLE

@@ -64,6 +64,7 @@ class OrdersFragment : Fragment() {
         viewModel.notLoggedIn.observe(viewLifecycleOwner, {
             it?.let {
                 if (it){
+                    binding.currentOrderLayout.visibility = View.GONE
                     binding.currentOrdersRecyclerView.visibility = View.GONE
                     binding.currentOrdersHardCoded.visibility = View.GONE
                     binding.previousOrdersHardCoded.visibility = View.GONE
@@ -72,6 +73,7 @@ class OrdersFragment : Fragment() {
                     binding.loginText.visibility = View.VISIBLE
                 }
                 else {
+                    binding.currentOrderLayout.visibility = View.VISIBLE
                     binding.currentOrdersRecyclerView.visibility = View.VISIBLE
                     binding.currentOrdersHardCoded.visibility = View.VISIBLE
                     binding.previousOrdersHardCoded.visibility = View.VISIBLE

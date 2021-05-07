@@ -9,63 +9,78 @@
             type="com.savage9ishere.tiwarimart.main_flow.ui.cart.CartViewModel" />
     </data>
 
-    <androidx.core.widget.NestedScrollView
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
+        <TextView
+            android:id="@+id/cart_empty_text"
+            android:text="Cart is empty"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:context=".main_flow.ui.cart.CartFragment">
+            android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/subtotal_text"
-                android:visibility="gone"
-                android:text="@{@string/subtotal_format(viewModel.itemCount, viewModel.subTotal)}"
-                android:layout_marginTop="8dp"
-                tools:text = "Subtotal (4 items) : ₹4680"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <Button
-                android:visibility="gone"
-                android:layout_marginTop="10dp"
-                android:id="@+id/proceed_to_buy_button"
-                android:text="Proceed to Buy"
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:backgroundTint="#FFC554"
-                android:textAllCaps="true"
-                />
+                tools:context=".main_flow.ui.cart.CartFragment">
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/cart_items_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <TextView
+                    android:id="@+id/subtotal_text"
+                    android:visibility="gone"
+                    android:text="@{@string/subtotal_format(viewModel.itemCount, viewModel.subTotal)}"
+                    android:layout_marginTop="8dp"
+                    tools:text = "Subtotal (4 items) : ₹4680"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-            <TextView
-                android:id="@+id/save_for_later_text"
-                android:visibility="gone"
-                android:layout_marginTop="32dp"
-                android:text="Saved for later"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <Button
+                    android:visibility="gone"
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/proceed_to_buy_button"
+                    android:text="Proceed to Buy"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFC554"
+                    android:textAllCaps="true"
+                    />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:visibility="gone"
-                android:id="@+id/saved_for_later_recycler_view"
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/cart_items_recycler_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/save_for_later_text"
+                    android:visibility="gone"
+                    android:layout_marginTop="32dp"
+                    android:text="Saved for later"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
 
-    </androidx.core.widget.NestedScrollView>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:visibility="gone"
+                    android:id="@+id/saved_for_later_recycler_view"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+
+    </RelativeLayout>
+
 
 </layout>

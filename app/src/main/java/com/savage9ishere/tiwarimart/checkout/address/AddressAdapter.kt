@@ -11,12 +11,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.savage9ishere.tiwarimart.checkout.address.address_database.AddressEntity
 import com.savage9ishere.tiwarimart.databinding.AddressListItemBinding
 
-class AddressAdapter(private val onRootClick: () -> Unit, private val onDeliverToThisAddress: (AddressEntity) -> Unit, private val onEditAddress: (AddressEntity)-> Unit, private val onAddDeliveryInstructions: (AddressEntity) -> Unit): ListAdapter<AddressEntity, AddressAdapter.ViewHolder>(AddressDiffCallback()) {
-    class ViewHolder private constructor(val binding: AddressListItemBinding, val onRootClick: () -> Unit, val onDeliverToThisAddress: (AddressEntity) -> Unit, onEditAddress: (AddressEntity) -> Unit, onAddDeliveryInstructions: (AddressEntity) -> Unit): RecyclerView.ViewHolder(binding.root) {
+class AddressAdapter(
+    private val onRootClick: () -> Unit,
+    private val onDeliverToThisAddress: (AddressEntity) -> Unit,
+    private val onEditAddress: (AddressEntity) -> Unit
+): ListAdapter<AddressEntity, AddressAdapter.ViewHolder>(AddressDiffCallback()) {
+    class ViewHolder private constructor(
+        val binding: AddressListItemBinding,
+        val onRootClick: () -> Unit,
+        val onDeliverToThisAddress: (AddressEntity) -> Unit,
+        onEditAddress: (AddressEntity) -> Unit
+    ): RecyclerView.ViewHolder(binding.root) {
         private val addressText: TextView = binding.addressTextView
         private val deliverToThisAddressButton : Button = binding.deliverToThisAddressButton
         private val editAddressText : TextView = binding.editAddressButton
-        private val addDeliveryInstructions : TextView = binding.deliveryInstructionsButton
 
         private var currentAddress : AddressEntity? = null
 
@@ -33,12 +41,6 @@ class AddressAdapter(private val onRootClick: () -> Unit, private val onDeliverT
                     onEditAddress(it)
                 }
             }
-
-            addDeliveryInstructions.setOnClickListener {
-                currentAddress?.let {
-                    onAddDeliveryInstructions(it)
-                }
-            }
         }
 
         fun bind(item: AddressEntity){
@@ -52,26 +54,27 @@ class AddressAdapter(private val onRootClick: () -> Unit, private val onDeliverT
                     onRootClick()
                     deliverToThisAddressButton.visibility = View.VISIBLE
                     editAddressText.visibility = View.VISIBLE
-                    addDeliveryInstructions.visibility = View.VISIBLE
                 }
             }
 
-//            deliverToThisAddressButton.visibility = View.GONE
-//            editAddressText.visibility = View.GONE
-//            addDeliveryInstructions.visibility = View.GONE
         }
 
         companion object {
-            fun from(parent: ViewGroup, onRootClick: () -> Unit, onDeliverToThisAddress: (AddressEntity) -> Unit, onEditAddress: (AddressEntity) -> Unit, onAddDeliveryInstructions: (AddressEntity) -> Unit): ViewHolder{
+            fun from(
+                parent: ViewGroup,
+                onRootClick: () -> Unit,
+                onDeliverToThisAddress: (AddressEntity) -> Unit,
+                onEditAddress: (AddressEntity) -> Unit
+            ): ViewHolder{
                 val layoutInflater = LayoutInflater.from(parent.context)
                 val binding = AddressListItemBinding.inflate(layoutInflater, parent, false)
-                return ViewHolder(binding, onRootClick, onDeliverToThisAddress, onEditAddress, onAddDeliveryInstructions)
+                return ViewHolder(binding, onRootClick, onDeliverToThisAddress, onEditAddress)
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent, onRootClick, onDeliverToThisAddress, onEditAddress, onAddDeliveryInstructions)
+        return ViewHolder.from(parent, onRootClick, onDeliverToThisAddress, onEditAddress)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {

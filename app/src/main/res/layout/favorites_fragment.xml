@@ -11,6 +11,14 @@
         android:layout_height="match_parent"
         tools:context=".main_flow.ui.user.favorites.FavoritesFragment">
 
+        <TextView
+            android:visibility="gone"
+            android:text="No favorites yet"
+            android:id="@+id/favorites_empty_text"
+            android:layout_centerInParent="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/favorites_recycler_view"
             android:layout_width="match_parent"

@@ -133,7 +133,7 @@ class FinalBillViewModel(
     val orderPlacedSuccessfully : LiveData<Boolean?>
         get() = _orderPlacedSuccessfully
 
-    fun placeOrder() {
+    fun placeOrder(address: AddressItem) {
         val databaseRef = Firebase.database.reference
         val auth = Firebase.auth
         val user = auth.currentUser
@@ -142,7 +142,8 @@ class FinalBillViewModel(
         val orderRef = databaseRef.child("orders").child(phoneNumber!!)
         val key = orderRef.push().key ?: return
 
-        val item = OrderItem(listItems, address, paymentMethod, key, System.currentTimeMillis(), 0L, "ORDER PROCESSING", user.phoneNumber!!)
+        val item = OrderItem(listItems,
+            address, paymentMethod, key, System.currentTimeMillis(), 0L, "ORDER PROCESSING", user.phoneNumber!!)
 
         orderRef.child(key).setValue(item).addOnCompleteListener {
             viewModelScope.launch {

@@ -28,7 +28,7 @@ class PaymentFragment : Fragment() {
 
         val itemsList : ArrayList<CartItems>? = requireArguments().getParcelableArrayList("itemsList")
         val address : AddressItem? = requireArguments().getParcelable("address")
-
+        address!!.deliveryInstructions = ""
         viewModel = ViewModelProvider(this).get(PaymentViewModel::class.java)
 
         binding.codButton.setOnClickListener {
@@ -36,7 +36,8 @@ class PaymentFragment : Fragment() {
             b.putParcelableArrayList("itemsList", itemsList)
             b.putParcelable("address", address)
             b.putString("paymentMethod", "cod")
-            findNavController().navigate(R.id.action_paymentFragment_to_finalBillFragment, b)
+            if (findNavController().currentDestination?.id == R.id.paymentFragment)
+                findNavController().navigate(R.id.action_paymentFragment_to_finalBillFragment, b)
         }
 
         binding.upiButton.setOnClickListener {
@@ -44,7 +45,8 @@ class PaymentFragment : Fragment() {
             b.putParcelableArrayList("itemsList", itemsList)
             b.putParcelable("address", address)
             b.putString("paymentMethod", "upi")
-            findNavController().navigate(R.id.action_paymentFragment_to_finalBillFragment, b)
+            if (findNavController().currentDestination?.id == R.id.paymentFragment)
+                findNavController().navigate(R.id.action_paymentFragment_to_finalBillFragment, b)
         }
 
         return binding.root

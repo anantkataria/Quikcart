@@ -2,7 +2,6 @@ package com.savage9ishere.tiwarimart.checkout.address
 
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -43,11 +42,9 @@ class AddressFragment : Fragment() {
                            viewModel.onRootClicked()
         }, {
            viewModel.onDeliverToThisAddressClicked(it)
-        }, {
-           viewModel.onEditAddressClicked(it)
-        }, {
-            viewModel.onAddDeliveryInstructionsClicked(it)
-        })
+        }) {
+                viewModel.onEditAddressClicked(it)
+            }
         binding.addressRecyclerView.adapter = addressAdapter
         binding.addressRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
 
@@ -74,7 +71,8 @@ class AddressFragment : Fragment() {
                 val addressItem = AddressItem(it.fullName, it.mobileNumber, it.pinCode, it.flatHouseNoName, it.areaColonyStreet, it.landmark, it.townCity, it.state, it.deliveryInstructions)
                 b.putParcelable("address", addressItem)
                 b.putParcelableArrayList("itemsList", itemsList)
-                findNavController().navigate(R.id.action_addressFragment_to_paymentFragment, b)
+                if (findNavController().currentDestination?.id == R.id.addressFragment)
+                    findNavController().navigate(R.id.action_addressFragment_to_paymentFragment, b)
                 viewModel.doneOnDeliverToThisAddress()
             }
         })
@@ -86,7 +84,8 @@ class AddressFragment : Fragment() {
                 val addressId = it.addressId
                 b.putParcelable("addressItem", addressItem)
                 b.putLong("addressId", addressId)
-                findNavController().navigate(R.id.action_addressFragment_to_editAddressFragment, b)
+                if (findNavController().currentDestination?.id == R.id.addressFragment)
+                    findNavController().navigate(R.id.action_addressFragment_to_editAddressFragment, b)
                 viewModel.doneOnEditAddress()
             }
         })

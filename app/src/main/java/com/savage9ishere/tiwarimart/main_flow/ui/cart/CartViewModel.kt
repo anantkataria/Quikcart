@@ -20,9 +20,17 @@ class CartViewModel(private val cartItemsDatabase: CartItemDao,private val saveF
 
     val itemCountForSaveForLater = saveForLaterDatabase.getItemCount()
 
+    private val _everythingEmpty = MutableLiveData<Boolean?>()
+    val everythingEmpty : LiveData<Boolean?>
+        get() = _everythingEmpty
+
     private val _moveAheadToBuy = MutableLiveData<ArrayList<CartItems>?>()
     val moveAheadToBuy : LiveData<ArrayList<CartItems>?>
         get() = _moveAheadToBuy
+
+    fun checkEverythingEmpty() {
+        _everythingEmpty.value = itemCount.value == 0 && subTotal.value == 0
+    }
 
     fun onIncrementClick(cartItemEntity: CartItemEntity) {
         //increment item quantity by one and update in the database,

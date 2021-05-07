@@ -26,6 +26,7 @@
 
 
         <LinearLayout
+            android:id="@+id/ll1"
             android:layout_width="match_parent"
             android:layout_height="150dp"
             android:layout_below="@id/payment_method_hard_coded"
@@ -63,7 +64,6 @@
                 app:strokeColor="#B7DFF5"
                 app:strokeWidth="0.5dp" />
         </LinearLayout>
-
 
     </RelativeLayout>
 

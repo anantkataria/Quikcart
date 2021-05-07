@@ -122,7 +122,14 @@ class ReviewViewModel(val item: Item, val categoryName: String) : ViewModel() {
 
         databaseRef.child("users").child(phone!!).addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val userr : User? = snapshot.getValue(User::class.java)
+                var userr : User? = null
+                if (snapshot.exists()){
+                    userr = snapshot.getValue(User::class.java)
+                }
+                else {
+                    userr = User("Anonymous", "Nil", "Nil")
+                }
+
                 val revieww = Review(userr!!, arrayList, review, title, rating, 0, key)
 
                 val map = hashMapOf(
