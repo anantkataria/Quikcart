@@ -116,7 +116,7 @@ class SearchViewModel(
 
         for (i in stockFiltersList.indices){
             val f = stockFiltersList[i].toString()
-            filter += " and (( in_stock = 0 ))"
+            filter += " and (( in_stock = 1 ))"
         }
 
         val queryString = "SELECT * FROM category_wise_items_table WHERE ( $column LIKE '$query' $filter ) ORDER BY $sortColumnName $order LIMIT $limit OFFSET $offset"
