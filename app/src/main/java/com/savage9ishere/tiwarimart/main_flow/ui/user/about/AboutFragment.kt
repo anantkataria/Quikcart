@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.savage9ishere.tiwarimart.R
 import com.savage9ishere.tiwarimart.databinding.AboutFragmentBinding
 
 class AboutFragment : Fragment() {

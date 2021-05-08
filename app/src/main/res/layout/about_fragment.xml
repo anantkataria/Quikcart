@@ -23,7 +23,7 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
-                android:text="This app is, as the name suggests, is dedicated to our instructor sir, Saurabh Tiwari.\n\nDear sir, Thank you for giving us this project.\n\nWe learned a lot through it."
+                android:text="@string/about_speech"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView

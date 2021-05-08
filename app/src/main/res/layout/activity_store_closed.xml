@@ -1,26 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".store_closed.StoreClosedActivity">
+    android:layout_width="match_parent">
 
-    <TextView
-        android:layout_margin="8dp"
-        android:id="@+id/hardcoded"
-        android:text="Sorry, The store is closed"
-        android:gravity="center"
-        android:textSize="40sp"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        tools:context=".store_closed.StoreClosedActivity">
 
-    <TextView
-        android:textSize="40sp"
-        android:layout_margin="8dp"
-        android:id="@+id/opening_again_text"
-        android:layout_below="@+id/hardcoded"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        <ImageView
+            android:id="@+id/closed_image"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_store_closed"
+            android:layout_width="250dp"
+            android:layout_height="350dp"/>
 
-</RelativeLayout>
+        <RelativeLayout
+            android:layout_below="@+id/closed_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/store_close_layout"
+            android:gravity="center"
+
+            >
+
+            <ImageView
+                android:layout_centerVertical="true"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:id="@+id/store_close_image"
+                android:src="@drawable/ic_warning">
+            </ImageView>
+
+
+            <TextView
+                android:layout_centerVertical="true"
+                android:id="@+id/alert_hardcoded"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Alert"
+                android:layout_marginStart="8dp"
+                android:layout_toEndOf="@id/store_close_image"
+                android:textColor="#E88D4F"
+                android:textStyle="bold"
+                android:textSize="22sp" />
+
+
+        </RelativeLayout>
+
+
+        <TextView
+            android:id="@+id/hardcoded"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:gravity="center"
+            android:text="Sorry,the Store is currently closed."
+            android:layout_below="@id/store_close_layout"
+            android:textColor="@color/dark_grey"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/opening_again_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/hardcoded"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginStart="8dp"
+            android:gravity="center"
+            android:layout_marginBottom="10dp"
+            android:textColor="#30333B"
+            android:textSize="14sp" />
+
+        <Button
+            android:layout_below="@+id/opening_again_text"
+            android:id="@+id/store_close_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/button"
+            android:text="Okay"
+            android:textAllCaps="false"
+            android:layout_marginTop="32dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            app:backgroundTint="#FFC554"/>
+
+
+    </RelativeLayout>
+
+</ScrollView>
