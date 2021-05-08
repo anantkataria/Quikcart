@@ -8,6 +8,6 @@
     <fragment
         android:id="@+id/loginOrRegisterFragment2"
         android:name="com.savage9ishere.tiwarimart.authentication.login_or_register.LoginOrRegisterFragment"
-        android:label="login_or_register_fragment"
+        android:label="Login/Register"
         tools:layout="@layout/login_or_register_fragment" />
 </navigation>

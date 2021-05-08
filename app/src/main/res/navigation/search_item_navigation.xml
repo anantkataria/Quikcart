@@ -30,5 +30,5 @@
     <fragment
         android:id="@+id/reviewFragment3"
         android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.review.ReviewFragment"
-        android:label="ReviewFragment" />
+        android:label="Review" />
 </navigation>

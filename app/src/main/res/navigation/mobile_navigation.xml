@@ -191,11 +191,11 @@
     <fragment
         android:id="@+id/slotMachineFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.games.slot_machine.SlotMachineFragment"
-        android:label="SlotMachineFragment" />
+        android:label="Slot Machine" />
     <fragment
         android:id="@+id/rouletteFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.games.roulette.RouletteFragment"
-        android:label="RouletteFragment" />
+        android:label="Roulette" />
     <fragment
         android:id="@+id/customerSupportFragment"
         android:name="com.savage9ishere.tiwarimart.main_flow.ui.user.customer_support.CustomerSupportFragment"

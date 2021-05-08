@@ -48,7 +48,7 @@
     <fragment
         android:id="@+id/reviewFragment"
         android:name="com.savage9ishere.tiwarimart.fragment_container.particular_item.review.ReviewFragment"
-        android:label="review_fragment"
+        android:label="Review"
         tools:layout="@layout/review_fragment" />
     <fragment
         android:id="@+id/cartFragment"
